@@ -42,6 +42,11 @@
 
     _pullRequestData = [[NSMutableArray alloc] initWithCapacity:0];
     [self.pullRequestTable reloadData];
+
+    switchSidebar = NO;
+    [self.splitView adjustSubviews];
+
+    [self.api generateDummiesIntoMOC:self.managedObjectContext];
 }
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "com.torsten-and-lars.GitHubNotificationCenter" in the user's Application Support directory.
@@ -50,26 +55,6 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *appSupportURL = [[fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask] lastObject];
     return [appSupportURL URLByAppendingPathComponent:@"com.torsten-and-lars.GitHubNotificationCenter"];
-}
-
-// ------------------------------------------------------------------------------------------
-#pragma mark - NSTableview DataSource and Delegate
-// ------------------------------------------------------------------------------------------
-
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return _pullRequestData ? [_pullRequestData count] : 2;
-}
-
-- (NSView *)tableView:(NSTableView *)tableView
-   viewForTableColumn:(NSTableColumn *)tableColumn
-                  row:(NSInteger)row {
-
-    // Retrieve to get the @"MyView" from the pool
-    // If no version is available in the pool, load the Interface Builder version
-    NSView *result = [tableView makeViewWithIdentifier:@"PullRequest" owner:self];
-
-    // return the result.
-    return result;
 }
 
 // ------------------------------------------------------------------------------------------
