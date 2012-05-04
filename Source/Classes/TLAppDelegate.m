@@ -7,6 +7,15 @@
 //
 
 #import "TLAppDelegate.h"
+#import "TLGitHubAPI.h"
+
+
+@interface TLAppDelegate()
+
+@property (nonatomic, strong) TLGitHubAPI *api;
+
+@end
+
 
 #define SIDEBAR_WIDTH 395
 
@@ -16,6 +25,8 @@
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize managedObjectContext = __managedObjectContext;
+@synthesize api = _api;
+
 
 @synthesize splitView;
 @synthesize masterView;
@@ -25,6 +36,11 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    // Insert code here to initialize your application
+
+    self.api = [[TLGitHubAPI alloc] init];
+    [self.api updateIntoMOC:self.managedObjectContext];
+
     _pullRequestData = [[NSMutableArray alloc] initWithCapacity:0];
     [self.pullRequestTable reloadData];
 }
@@ -48,11 +64,11 @@
 - (NSView *)tableView:(NSTableView *)tableView
    viewForTableColumn:(NSTableColumn *)tableColumn
                   row:(NSInteger)row {
-    
+
     // Retrieve to get the @"MyView" from the pool
     // If no version is available in the pool, load the Interface Builder version
     NSView *result = [tableView makeViewWithIdentifier:@"PullRequest" owner:self];
-    
+
     // return the result.
     return result;
 }
@@ -64,34 +80,34 @@
 - (void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
 {
     float dividerThickness = [sender dividerThickness];
-    
+
     NSRect newFrame = [sender frame];
-    NSRect leftFrame = [[[sender subviews] objectAtIndex:0] frame]; 
+    NSRect leftFrame = [[[sender subviews] objectAtIndex:0] frame];
     NSRect rightFrame = [[[sender subviews] objectAtIndex:1] frame];
-    
+
     if ([self.masterView isHidden]) {
         rightFrame.size.width = newFrame.size.width;
         rightFrame.size.height = newFrame.size.height;
         rightFrame.origin.x = 0;
-        
+
         [[[sender subviews] objectAtIndex:1] setFrame:rightFrame];
     }
     else {
-        leftFrame.size.width = leftFrame.size.width; 
+        leftFrame.size.width = leftFrame.size.width;
         leftFrame.size.height = newFrame.size.height;
         leftFrame.origin = NSMakePoint(0, 0);
         rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
         rightFrame.size.height = newFrame.size.height;
         rightFrame.origin.x = leftFrame.size.width + dividerThickness;
-        
+
         [[[sender subviews] objectAtIndex:0] setFrame:leftFrame];
         [[[sender subviews] objectAtIndex:1] setFrame:rightFrame];
     }
 }
 
-- (NSRect)splitView:(NSSplitView *)splitView 
-      effectiveRect:(NSRect)proposedEffectiveRect 
-       forDrawnRect:(NSRect)drawnRect 
+- (NSRect)splitView:(NSSplitView *)splitView
+      effectiveRect:(NSRect)proposedEffectiveRect
+       forDrawnRect:(NSRect)drawnRect
    ofDividerAtIndex:(NSInteger)dividerIndex
 {
     return NSMakeRect(0, 0, 0, 0);
@@ -108,24 +124,24 @@
 
 - (IBAction)toggleSidebar:(id)sender
 {
-	NSView *contentView = [self.splitView.subviews objectAtIndex:1];
-	
-	NSRect sidebarTargetFrame = NSMakeRect(self.splitView.frame.origin.x, 
-                                           self.splitView.frame.origin.y, 
-                                           switchSidebar ? SIDEBAR_WIDTH : 0 - self.splitView.dividerThickness, 
+    NSView *contentView = [self.splitView.subviews objectAtIndex:1];
+
+    NSRect sidebarTargetFrame = NSMakeRect(self.splitView.frame.origin.x,
+                                           self.splitView.frame.origin.y,
+                                           switchSidebar ? SIDEBAR_WIDTH : 0 - self.splitView.dividerThickness,
                                            self.splitView.frame.size.height);
-    
-	NSRect contenTargetFrame = NSMakeRect(switchSidebar ? SIDEBAR_WIDTH : 0  - self.splitView.dividerThickness, 
+
+    NSRect contenTargetFrame = NSMakeRect(switchSidebar ? SIDEBAR_WIDTH : 0  - self.splitView.dividerThickness,
                                           contentView.frame.origin.y,
-                                          NSMaxX(contentView.frame) - switchSidebar ? SIDEBAR_WIDTH : 0, 
+                                          NSMaxX(contentView.frame) - switchSidebar ? SIDEBAR_WIDTH : 0,
                                           contentView.frame.size.height);
-	
-	[NSAnimationContext beginGrouping];
-	[[NSAnimationContext currentContext] setDuration:0.2];
-	[[self.splitView animator] setFrame: sidebarTargetFrame];
-	[[contentView animator] setFrame: contenTargetFrame];
-	[NSAnimationContext endGrouping];
-    
+
+    [NSAnimationContext beginGrouping];
+    [[NSAnimationContext currentContext] setDuration:0.2];
+    [[self.splitView animator] setFrame: sidebarTargetFrame];
+    [[contentView animator] setFrame: contenTargetFrame];
+    [NSAnimationContext endGrouping];
+
     switchSidebar = !switchSidebar;
 }
 
@@ -136,7 +152,7 @@
     if (__managedObjectModel) {
         return __managedObjectModel;
     }
-	
+
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"GitHubNotificationCenter" withExtension:@"momd"];
     __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return __managedObjectModel;
@@ -148,19 +164,19 @@
     if (__persistentStoreCoordinator) {
         return __persistentStoreCoordinator;
     }
-    
+
     NSManagedObjectModel *mom = [self managedObjectModel];
     if (!mom) {
         NSLog(@"%@:%@ No model to generate a store from", [self class], NSStringFromSelector(_cmd));
         return nil;
     }
-    
+
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *applicationFilesDirectory = [self applicationFilesDirectory];
     NSError *error = nil;
-    
+
     NSDictionary *properties = [applicationFilesDirectory resourceValuesForKeys:[NSArray arrayWithObject:NSURLIsDirectoryKey] error:&error];
-    
+
     if (!properties) {
         BOOL ok = NO;
         if ([error code] == NSFileReadNoSuchFileError) {
@@ -174,16 +190,16 @@
         if (![[properties objectForKey:NSURLIsDirectoryKey] boolValue]) {
             // Customize and localize this error.
             NSString *failureDescription = [NSString stringWithFormat:@"Expected a folder to store application data, found a file (%@).", [applicationFilesDirectory path]];
-            
+
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
             [dict setValue:failureDescription forKey:NSLocalizedDescriptionKey];
             error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:101 userInfo:dict];
-            
+
             [[NSApplication sharedApplication] presentError:error];
             return nil;
         }
     }
-    
+
     NSURL *url = [applicationFilesDirectory URLByAppendingPathComponent:@"GitHubNotificationCenter.storedata"];
     NSPersistentStoreCoordinator *coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
     if (![coordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error]) {
@@ -191,17 +207,17 @@
         return nil;
     }
     __persistentStoreCoordinator = coordinator;
-    
+
     return __persistentStoreCoordinator;
 }
 
-// Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) 
+// Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
 - (NSManagedObjectContext *)managedObjectContext
 {
     if (__managedObjectContext) {
         return __managedObjectContext;
     }
-    
+
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (!coordinator) {
         NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -227,11 +243,11 @@
 - (IBAction)saveAction:(id)sender
 {
     NSError *error = nil;
-    
+
     if (![[self managedObjectContext] commitEditing]) {
         NSLog(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));
     }
-    
+
     if (![[self managedObjectContext] save:&error]) {
         [[NSApplication sharedApplication] presentError:error];
     }
@@ -240,24 +256,24 @@
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
 {
     // Save changes in the application's managed object context before the application terminates.
-    
+
     if (!__managedObjectContext) {
         return NSTerminateNow;
     }
-    
+
     if (![[self managedObjectContext] commitEditing]) {
         NSLog(@"%@:%@ unable to commit editing to terminate", [self class], NSStringFromSelector(_cmd));
         return NSTerminateCancel;
     }
-    
+
     if (![[self managedObjectContext] hasChanges]) {
         return NSTerminateNow;
     }
-    
+
     NSError *error = nil;
     if (![[self managedObjectContext] save:&error]) {
 
-        // Customize this code block to include application-specific recovery steps.              
+        // Customize this code block to include application-specific recovery steps.
         BOOL result = [sender presentError:error];
         if (result) {
             return NSTerminateCancel;
@@ -274,7 +290,7 @@
         [alert addButtonWithTitle:cancelButton];
 
         NSInteger answer = [alert runModal];
-        
+
         if (answer == NSAlertAlternateReturn) {
             return NSTerminateCancel;
         }
