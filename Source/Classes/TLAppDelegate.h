@@ -15,6 +15,7 @@
 }
 
 @property (assign) IBOutlet NSWindow *window;
+@property (readonly) NSManagedObjectContext *mainManagedObjectContext;
 
 @property (readwrite, strong, nonatomic) IBOutlet NSSplitView *splitView;
 @property (readwrite, strong, nonatomic) IBOutlet NSView *masterView;

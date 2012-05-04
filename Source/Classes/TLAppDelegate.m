@@ -50,6 +50,13 @@
 }
 
 
+/// Proxy for Interface builder
+- (NSManagedObjectContext *)mainManagedObjectContext
+{
+    return [TLCoreData mainManagedObjectContext];
+}
+
+
 - (NSView *)tableView:(NSTableView *)tableView
    viewForTableColumn:(NSTableColumn *)tableColumn
                   row:(NSInteger)row {
