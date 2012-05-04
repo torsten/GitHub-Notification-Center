@@ -8,6 +8,8 @@
 
 #import "TLAppDelegate.h"
 
+#define SIDEBAR_WIDTH 395
+
 @implementation TLAppDelegate
 
 @synthesize window = _window;
@@ -15,9 +17,16 @@
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize managedObjectContext = __managedObjectContext;
 
+@synthesize splitView;
+@synthesize masterView;
+@synthesize detailView;
+
+@synthesize pullRequestTable;
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    _pullRequestData = [[NSMutableArray alloc] initWithCapacity:0];
+    [self.pullRequestTable reloadData];
 }
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "com.torsten-and-lars.GitHubNotificationCenter" in the user's Application Support directory.
@@ -27,6 +36,99 @@
     NSURL *appSupportURL = [[fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask] lastObject];
     return [appSupportURL URLByAppendingPathComponent:@"com.torsten-and-lars.GitHubNotificationCenter"];
 }
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - NSTableview DataSource and Delegate
+// ------------------------------------------------------------------------------------------
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
+    return _pullRequestData ? [_pullRequestData count] : 2;
+}
+
+- (NSView *)tableView:(NSTableView *)tableView
+   viewForTableColumn:(NSTableColumn *)tableColumn
+                  row:(NSInteger)row {
+    
+    // Retrieve to get the @"MyView" from the pool
+    // If no version is available in the pool, load the Interface Builder version
+    NSView *result = [tableView makeViewWithIdentifier:@"PullRequest" owner:self];
+    
+    // return the result.
+    return result;
+}
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - NSSplitView Delegate implementation
+// ------------------------------------------------------------------------------------------
+
+- (void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
+{
+    float dividerThickness = [sender dividerThickness];
+    
+    NSRect newFrame = [sender frame];
+    NSRect leftFrame = [[[sender subviews] objectAtIndex:0] frame]; 
+    NSRect rightFrame = [[[sender subviews] objectAtIndex:1] frame];
+    
+    if ([self.masterView isHidden]) {
+        rightFrame.size.width = newFrame.size.width;
+        rightFrame.size.height = newFrame.size.height;
+        rightFrame.origin.x = 0;
+        
+        [[[sender subviews] objectAtIndex:1] setFrame:rightFrame];
+    }
+    else {
+        leftFrame.size.width = leftFrame.size.width; 
+        leftFrame.size.height = newFrame.size.height;
+        leftFrame.origin = NSMakePoint(0, 0);
+        rightFrame.size.width = newFrame.size.width - leftFrame.size.width - dividerThickness;
+        rightFrame.size.height = newFrame.size.height;
+        rightFrame.origin.x = leftFrame.size.width + dividerThickness;
+        
+        [[[sender subviews] objectAtIndex:0] setFrame:leftFrame];
+        [[[sender subviews] objectAtIndex:1] setFrame:rightFrame];
+    }
+}
+
+- (NSRect)splitView:(NSSplitView *)splitView 
+      effectiveRect:(NSRect)proposedEffectiveRect 
+       forDrawnRect:(NSRect)drawnRect 
+   ofDividerAtIndex:(NSInteger)dividerIndex
+{
+    return NSMakeRect(0, 0, 0, 0);
+}
+
+- (BOOL)splitView:(NSSplitView *)splitView shouldHideDividerAtIndex:(NSInteger)dividerIndex
+{
+    return YES;
+}
+
+// ------------------------------------------------------------------------------------------
+#pragma mark - Sidebar Actions
+// ------------------------------------------------------------------------------------------
+
+- (IBAction)toggleSidebar:(id)sender
+{
+	NSView *contentView = [self.splitView.subviews objectAtIndex:1];
+	
+	NSRect sidebarTargetFrame = NSMakeRect(self.splitView.frame.origin.x, 
+                                           self.splitView.frame.origin.y, 
+                                           switchSidebar ? SIDEBAR_WIDTH : 0 - self.splitView.dividerThickness, 
+                                           self.splitView.frame.size.height);
+    
+	NSRect contenTargetFrame = NSMakeRect(switchSidebar ? SIDEBAR_WIDTH : 0  - self.splitView.dividerThickness, 
+                                          contentView.frame.origin.y,
+                                          NSMaxX(contentView.frame) - switchSidebar ? SIDEBAR_WIDTH : 0, 
+                                          contentView.frame.size.height);
+	
+	[NSAnimationContext beginGrouping];
+	[[NSAnimationContext currentContext] setDuration:0.2];
+	[[self.splitView animator] setFrame: sidebarTargetFrame];
+	[[contentView animator] setFrame: contenTargetFrame];
+	[NSAnimationContext endGrouping];
+    
+    switchSidebar = !switchSidebar;
+}
+
 
 // Creates if necessary and returns the managed object model for the application.
 - (NSManagedObjectModel *)managedObjectModel

@@ -14,6 +14,8 @@
 		2FDB9F8B1553F87500CB7487 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FDB9F811553F87500CB7487 /* InfoPlist.strings */; };
 		2FDB9F8C1553F87500CB7487 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDB9F831553F87500CB7487 /* MainMenu.xib */; };
 		2FDB9F8D1553F87500CB7487 /* GitHubNotificationCenter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB9F851553F87500CB7487 /* GitHubNotificationCenter.xcdatamodeld */; };
+		8F557F4515540EF700923D02 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F557F4415540EF700923D02 /* WebKit.framework */; };
+		8F557F4915540FCD00923D02 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F557F4815540FCD00923D02 /* WebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,9 @@
 		2FDB9F821553F87500CB7487 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2FDB9F841553F87500CB7487 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		2FDB9F861553F87500CB7487 /* GitHubNotificationCenter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitHubNotificationCenter.xcdatamodel; sourceTree = "<group>"; };
+		8F557F4415540EF700923D02 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		8F557F4715540FCD00923D02 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		8F557F4815540FCD00923D02 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F557F4515540EF700923D02 /* WebKit.framework in Frameworks */,
 				2FDB9F541553F7AE00CB7487 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,6 +74,7 @@
 		2FDB9F521553F7AE00CB7487 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8F557F4415540EF700923D02 /* WebKit.framework */,
 				2FDB9F531553F7AE00CB7487 /* Cocoa.framework */,
 				2FDB9F551553F7AE00CB7487 /* Other Frameworks */,
 			);
@@ -87,6 +94,8 @@
 		2FDB9F781553F87500CB7487 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8F557F4715540FCD00923D02 /* WebViewController.h */,
+				8F557F4815540FCD00923D02 /* WebViewController.m */,
 				2FDB9F791553F87500CB7487 /* main.m */,
 				2FDB9F7A1553F87500CB7487 /* TLAppDelegate.h */,
 				2FDB9F7B1553F87500CB7487 /* TLAppDelegate.m */,
@@ -173,6 +182,7 @@
 				2FDB9F871553F87500CB7487 /* main.m in Sources */,
 				2FDB9F881553F87500CB7487 /* TLAppDelegate.m in Sources */,
 				2FDB9F8D1553F87500CB7487 /* GitHubNotificationCenter.xcdatamodeld in Sources */,
+				8F557F4915540FCD00923D02 /* WebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
