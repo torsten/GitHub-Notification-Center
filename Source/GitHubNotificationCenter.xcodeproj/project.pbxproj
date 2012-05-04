@@ -18,6 +18,7 @@
 		2F48A4A015541289006F2750 /* _TLCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A49315541289006F2750 /* _TLCommit.m */; };
 		2F48A4A115541289006F2750 /* _TLGithubObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A49515541289006F2750 /* _TLGithubObject.m */; };
 		2F48A4A215541289006F2750 /* _TLPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A49715541289006F2750 /* _TLPullRequest.m */; };
+		2F48A4A615541488006F2750 /* NSManagedObjectContext+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A4A515541488006F2750 /* NSManagedObjectContext+Extensions.m */; };
 		2FDB9F541553F7AE00CB7487 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDB9F531553F7AE00CB7487 /* Cocoa.framework */; };
 		2FDB9F871553F87500CB7487 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB9F791553F87500CB7487 /* main.m */; };
 		2FDB9F881553F87500CB7487 /* TLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB9F7B1553F87500CB7487 /* TLAppDelegate.m */; };
@@ -85,6 +86,8 @@
 		2F48A49515541289006F2750 /* _TLGithubObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLGithubObject.m; sourceTree = "<group>"; };
 		2F48A49615541289006F2750 /* _TLPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TLPullRequest.h; sourceTree = "<group>"; };
 		2F48A49715541289006F2750 /* _TLPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLPullRequest.m; sourceTree = "<group>"; };
+		2F48A4A415541488006F2750 /* NSManagedObjectContext+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+Extensions.h"; sourceTree = "<group>"; };
+		2F48A4A515541488006F2750 /* NSManagedObjectContext+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+Extensions.m"; sourceTree = "<group>"; };
 		2FDB9F4F1553F7AE00CB7487 /* GitHubNotificationCenter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubNotificationCenter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FDB9F531553F7AE00CB7487 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2FDB9F561553F7AE00CB7487 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -162,6 +165,15 @@
 			path = Generated;
 			sourceTree = "<group>";
 		};
+		2F48A4A315541488006F2750 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2F48A4A415541488006F2750 /* NSManagedObjectContext+Extensions.h */,
+				2F48A4A515541488006F2750 /* NSManagedObjectContext+Extensions.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		2FDB9F441553F7AE00CB7487 = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +217,7 @@
 		2FDB9F781553F87500CB7487 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2F48A4A315541488006F2750 /* Extensions */,
 				2F48A47F15541289006F2750 /* CoreData */,
 				E5867AF815540F1100A7E61D /* TLGitHubAPI.h */,
 				E5867AF915540F1100A7E61D /* TLGitHubAPI.m */,
@@ -332,6 +345,7 @@
 				2F48A4A015541289006F2750 /* _TLCommit.m in Sources */,
 				2F48A4A115541289006F2750 /* _TLGithubObject.m in Sources */,
 				2F48A4A215541289006F2750 /* _TLPullRequest.m in Sources */,
+				2F48A4A615541488006F2750 /* NSManagedObjectContext+Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
