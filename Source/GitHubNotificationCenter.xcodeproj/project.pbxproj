@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F48A49815541289006F2750 /* TLAuthor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A48215541289006F2750 /* TLAuthor.m */; };
+		2F48A49915541289006F2750 /* TLComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A48415541289006F2750 /* TLComment.m */; };
+		2F48A49A15541289006F2750 /* TLCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A48615541289006F2750 /* TLCommit.m */; };
+		2F48A49B15541289006F2750 /* TLGithubObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A48815541289006F2750 /* TLGithubObject.m */; };
+		2F48A49C15541289006F2750 /* TLManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A48A15541289006F2750 /* TLManagedObject.m */; };
+		2F48A49D15541289006F2750 /* TLPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A48C15541289006F2750 /* TLPullRequest.m */; };
+		2F48A49E15541289006F2750 /* _TLAuthor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A48F15541289006F2750 /* _TLAuthor.m */; };
+		2F48A49F15541289006F2750 /* _TLComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A49115541289006F2750 /* _TLComment.m */; };
+		2F48A4A015541289006F2750 /* _TLCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A49315541289006F2750 /* _TLCommit.m */; };
+		2F48A4A115541289006F2750 /* _TLGithubObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A49515541289006F2750 /* _TLGithubObject.m */; };
+		2F48A4A215541289006F2750 /* _TLPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A49715541289006F2750 /* _TLPullRequest.m */; };
 		2FDB9F541553F7AE00CB7487 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDB9F531553F7AE00CB7487 /* Cocoa.framework */; };
 		2FDB9F871553F87500CB7487 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB9F791553F87500CB7487 /* main.m */; };
 		2FDB9F881553F87500CB7487 /* TLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB9F7B1553F87500CB7487 /* TLAppDelegate.m */; };
@@ -17,6 +28,29 @@
 		E5867AF7155400FB00A7E61D /* UAGithubEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5867AF5155400E800A7E61D /* UAGithubEngine.framework */; };
 		E5867AFA15540F1100A7E61D /* TLGitHubAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = E5867AF915540F1100A7E61D /* TLGitHubAPI.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		2F01E07C155409E0001A8DCC /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = wrapper.xcdatamodeld;
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILES_DIR)/$(INPUT_FILE_BASE).momd",
+			);
+			script = "echo \"Processing Data model files...\"\n\"${SRCROOT}/Scripts/processDataModelVersionFiles.sh\"";
+		};
+		2F01E07D155409FE001A8DCC /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = wrapper.xcdatamodel;
+			isEditable = 1;
+			outputFiles = (
+				"$(DERIVED_FILES_DIR)/$(INPUT_FILE_BASE).mom",
+			);
+			script = "echo \"Processing Data files...\"\n\"${SRCROOT}/Scripts/CoreData/processDataModelFiles.sh\"";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		E5867AF4155400E800A7E61D /* PBXContainerItemProxy */ = {
@@ -29,6 +63,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F48A48115541289006F2750 /* TLAuthor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLAuthor.h; sourceTree = "<group>"; };
+		2F48A48215541289006F2750 /* TLAuthor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLAuthor.m; sourceTree = "<group>"; };
+		2F48A48315541289006F2750 /* TLComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLComment.h; sourceTree = "<group>"; };
+		2F48A48415541289006F2750 /* TLComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLComment.m; sourceTree = "<group>"; };
+		2F48A48515541289006F2750 /* TLCommit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLCommit.h; sourceTree = "<group>"; };
+		2F48A48615541289006F2750 /* TLCommit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLCommit.m; sourceTree = "<group>"; };
+		2F48A48715541289006F2750 /* TLGithubObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLGithubObject.h; sourceTree = "<group>"; };
+		2F48A48815541289006F2750 /* TLGithubObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLGithubObject.m; sourceTree = "<group>"; };
+		2F48A48915541289006F2750 /* TLManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLManagedObject.h; sourceTree = "<group>"; };
+		2F48A48A15541289006F2750 /* TLManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLManagedObject.m; sourceTree = "<group>"; };
+		2F48A48B15541289006F2750 /* TLPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLPullRequest.h; sourceTree = "<group>"; };
+		2F48A48C15541289006F2750 /* TLPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLPullRequest.m; sourceTree = "<group>"; };
+		2F48A48E15541289006F2750 /* _TLAuthor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TLAuthor.h; sourceTree = "<group>"; };
+		2F48A48F15541289006F2750 /* _TLAuthor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLAuthor.m; sourceTree = "<group>"; };
+		2F48A49015541289006F2750 /* _TLComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TLComment.h; sourceTree = "<group>"; };
+		2F48A49115541289006F2750 /* _TLComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLComment.m; sourceTree = "<group>"; };
+		2F48A49215541289006F2750 /* _TLCommit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TLCommit.h; sourceTree = "<group>"; };
+		2F48A49315541289006F2750 /* _TLCommit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLCommit.m; sourceTree = "<group>"; };
+		2F48A49415541289006F2750 /* _TLGithubObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TLGithubObject.h; sourceTree = "<group>"; };
+		2F48A49515541289006F2750 /* _TLGithubObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLGithubObject.m; sourceTree = "<group>"; };
+		2F48A49615541289006F2750 /* _TLPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TLPullRequest.h; sourceTree = "<group>"; };
+		2F48A49715541289006F2750 /* _TLPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLPullRequest.m; sourceTree = "<group>"; };
 		2FDB9F4F1553F7AE00CB7487 /* GitHubNotificationCenter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubNotificationCenter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FDB9F531553F7AE00CB7487 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2FDB9F561553F7AE00CB7487 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -61,6 +117,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F48A47F15541289006F2750 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				2F48A48015541289006F2750 /* Entities */,
+				2F48A48D15541289006F2750 /* Generated */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		2F48A48015541289006F2750 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				2F48A48115541289006F2750 /* TLAuthor.h */,
+				2F48A48215541289006F2750 /* TLAuthor.m */,
+				2F48A48315541289006F2750 /* TLComment.h */,
+				2F48A48415541289006F2750 /* TLComment.m */,
+				2F48A48515541289006F2750 /* TLCommit.h */,
+				2F48A48615541289006F2750 /* TLCommit.m */,
+				2F48A48715541289006F2750 /* TLGithubObject.h */,
+				2F48A48815541289006F2750 /* TLGithubObject.m */,
+				2F48A48915541289006F2750 /* TLManagedObject.h */,
+				2F48A48A15541289006F2750 /* TLManagedObject.m */,
+				2F48A48B15541289006F2750 /* TLPullRequest.h */,
+				2F48A48C15541289006F2750 /* TLPullRequest.m */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		2F48A48D15541289006F2750 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				2F48A48E15541289006F2750 /* _TLAuthor.h */,
+				2F48A48F15541289006F2750 /* _TLAuthor.m */,
+				2F48A49015541289006F2750 /* _TLComment.h */,
+				2F48A49115541289006F2750 /* _TLComment.m */,
+				2F48A49215541289006F2750 /* _TLCommit.h */,
+				2F48A49315541289006F2750 /* _TLCommit.m */,
+				2F48A49415541289006F2750 /* _TLGithubObject.h */,
+				2F48A49515541289006F2750 /* _TLGithubObject.m */,
+				2F48A49615541289006F2750 /* _TLPullRequest.h */,
+				2F48A49715541289006F2750 /* _TLPullRequest.m */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 		2FDB9F441553F7AE00CB7487 = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +205,7 @@
 		2FDB9F781553F87500CB7487 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				2F48A47F15541289006F2750 /* CoreData */,
 				E5867AF815540F1100A7E61D /* TLGitHubAPI.h */,
 				E5867AF915540F1100A7E61D /* TLGitHubAPI.m */,
 				2FDB9F791553F87500CB7487 /* main.m */,
@@ -144,6 +246,8 @@
 				2FDB9F4D1553F7AE00CB7487 /* Resources */,
 			);
 			buildRules = (
+				2F01E07D155409FE001A8DCC /* PBXBuildRule */,
+				2F01E07C155409E0001A8DCC /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -217,6 +321,17 @@
 				2FDB9F881553F87500CB7487 /* TLAppDelegate.m in Sources */,
 				2FDB9F8D1553F87500CB7487 /* GitHubNotificationCenter.xcdatamodeld in Sources */,
 				E5867AFA15540F1100A7E61D /* TLGitHubAPI.m in Sources */,
+				2F48A49815541289006F2750 /* TLAuthor.m in Sources */,
+				2F48A49915541289006F2750 /* TLComment.m in Sources */,
+				2F48A49A15541289006F2750 /* TLCommit.m in Sources */,
+				2F48A49B15541289006F2750 /* TLGithubObject.m in Sources */,
+				2F48A49C15541289006F2750 /* TLManagedObject.m in Sources */,
+				2F48A49D15541289006F2750 /* TLPullRequest.m in Sources */,
+				2F48A49E15541289006F2750 /* _TLAuthor.m in Sources */,
+				2F48A49F15541289006F2750 /* _TLComment.m in Sources */,
+				2F48A4A015541289006F2750 /* _TLCommit.m in Sources */,
+				2F48A4A115541289006F2750 /* _TLGithubObject.m in Sources */,
+				2F48A4A215541289006F2750 /* _TLPullRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
