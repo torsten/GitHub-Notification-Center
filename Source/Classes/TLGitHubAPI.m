@@ -115,8 +115,8 @@
             pullRequest.updated_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"updated_at"]];
             pullRequest.repository = repo;
 
-            [self updateCommentsForPullRequest:pullRequest inRepo:repo.name intoMOC:moc];
-            [self updateCommitsForPullRequest:pullRequest inRepo:repo.name intoMOC:moc];
+            [self updateCommentsForPullRequest:pullRequest inRepo:repo intoMOC:moc];
+            [self updateCommitsForPullRequest:pullRequest inRepo:repo intoMOC:moc];
         }
 
         [moc saveChanges];
@@ -129,12 +129,12 @@
 
 
 - (void)updateCommentsForPullRequest:(TLPullRequest *)pullRequest
-                              inRepo:(NSString *)repo
+                              inRepo:(TLRepository *)repo
                              intoMOC:(NSManagedObjectContext *)moc
 {
     int pullRequestNumber = pullRequest.numberValue;
 
-    [self.engine commentsForIssue:pullRequestNumber forRepository:repo success:^(NSArray *comments)
+    [self.engine commentsForIssue:pullRequestNumber forRepository:repo.name success:^(NSArray *comments)
     {
         // NSLog(@"pull request comments success: (%@) %@", [comments class], comments);
 
@@ -149,7 +149,9 @@
             pullRequestComment.created_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"created_at"]];
             pullRequestComment.updated_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"updated_at"]];
             pullRequestComment.url = [NSString stringWithFormat:@"https://github.com/%@/pull/%d#issuecomment-%@",
-                                                                repo, pullRequestNumber, [dict objectForKey:@"id"]];
+                                                                repo.name,
+                                                                pullRequestNumber,
+                                                                [dict objectForKey:@"id"]];
 
             [pullRequest addCommentsObject:pullRequestComment];
         }
@@ -164,79 +166,24 @@
 
 
 - (void)updateCommitsForPullRequest:(TLPullRequest *)pullRequest
-                             inRepo:(NSString *)repo
+                             inRepo:(TLRepository *)repo
                             intoMOC:(NSManagedObjectContext *)moc
 {
-    int pullRequestNumber = pullRequest.numberValue;
-
-    [self.engine commitsInPullRequest:pullRequestNumber forRepository:repo
-    success:^(id thing)
+    [self.engine commitsInPullRequest:pullRequest.numberValue forRepository:repo.name success:^(NSArray *commits)
     {
-        // NSLog(@"commit success: (%@) %@", [thing class], thing);
-        // (__NSArrayM) (
-        //         {
-        //         author =         {
-            // ...
-        //         };
-        //         commit =         {
-        //             author =             {
-        //                 date = "2012-05-03T07:23:23-07:00";
-        //                 email = "torsten.becker@gmail.com";
-        //                 name = "Torsten Becker";
-        //             };
-        //             committer =             {
-        //                 date = "2012-05-03T07:23:23-07:00";
-        //                 email = "torsten.becker@gmail.com";
-        //                 name = "Torsten Becker";
-        //             };
-        //             message = "Do not attempt to delete any database files if we have an in-memory store.";
-        //             tree =             {
-        //                 sha = d4...;
-        //                 url = "https://api.github.com/repos/6wunderkinder/.../git/trees/d43...";
-        //             };
-        //             url = "https://api.github.com/repos/6wunderkinder/.../git/commits/83e...";
-        //         };
-        //         committer =         {
-        //             "avatar_url" = "https://secure.gravatar.com/avatar/7b...?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png";
-        //             "gravatar_id" = 7bce86ef594d03d98383f9a9d842d32d;
-        //             id = 13548;
-        //             login = torsten;
-        //             url = "https://api.github.com/users/torsten";
-        //         };
-        //         parents =         (
-        //                         {
-        //                 sha = 61...;
-        //                 url = "https://api.github.com/repos/6wunderkinder/.../commits/61...";
-        //             }
-        //         );
-        //         sha = 83...;
-        //         url = "https://api.github.com/repos/6wunderkinder/.../commits/83...";
-        //     },
-        // ....
-
-
-
-        NSArray *commits = (NSArray *)thing;
+        // NSLog(@"commit comments success: (%@) %@", [commits class], commits);
 
         for (NSDictionary *dict in commits)
         {
-            // date, url, (author),
-            // message
-
             NSString *sha = [dict objectForKey:@"sha"];
             NSString *message = [[dict objectForKey:@"commit"] objectForKey:@"message"];
-
             NSString *dateString = [[[dict objectForKey:@"commit"] objectForKey:@"author"] objectForKey:@"date"];
             NSDate *date = [NSDateFormatter dateFromRFC3339String:dateString];
 
-            NSLog(@"   - sha: %@", sha);
-            NSLog(@"   - message: %@", message);
-            NSLog(@"   - date: %@", date);
-
             TLCommit *commit = [TLCommit fetchOrCreateWithID:sha managedObjectContext:moc];
             commit.message = message;
-            commit.url = [NSString stringWithFormat:@"https://github.com/%@/commit/%@", repo, sha];
             commit.created_at = date;
+            commit.url = [NSString stringWithFormat:@"https://github.com/%@/commit/%@", repo.name, sha];
 
             [pullRequest addCommitsObject:commit];
 
@@ -253,13 +200,12 @@
 
 
 - (void)updateCommentsForCommit:(TLCommit *)commit
-                         inRepo:(NSString *)repo
+                         inRepo:(TLRepository *)repo
                         intoMOC:(NSManagedObjectContext *)moc
 {
     NSString *sha = commit.githubID;
 
-    [self.engine commitCommentsForCommit:sha inRepository:repo
-    success:^(id thing)
+    [self.engine commitCommentsForCommit:sha inRepository:repo.name success:^(id thing)
     {
         // NSLog(@"commit comment success: (%@) %@", [thing class], thing);
         //  (__NSArrayM) (
@@ -304,7 +250,7 @@
             TLComment *commitComment = [TLComment fetchOrCreateWithID:githubID managedObjectContext:moc];
             commitComment.message = message;
             commitComment.url = [NSString stringWithFormat:@"https://github.com/%@/commit/%@#commitcomment-%@",
-                                                           repo, sha, githubID];
+                                                           repo.name, sha, githubID];
             commitComment.updated_at = date;
 
             [commit addCommentsObject:commitComment];
