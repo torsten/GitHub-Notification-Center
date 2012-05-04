@@ -42,9 +42,9 @@ extern const struct TLCommitFetchedProperties {
 
 
 
-@property (nonatomic, strong) TLComment* comments;
+@property (nonatomic, strong) NSSet* comments;
 
-//- (BOOL)validateComments:(id*)value_ error:(NSError**)error_;
+- (NSMutableSet*)commentsSet;
 
 
 
@@ -61,6 +61,11 @@ extern const struct TLCommitFetchedProperties {
 
 @interface _TLCommit (CoreDataGeneratedAccessors)
 
+- (void)addComments:(NSSet*)value_;
+- (void)removeComments:(NSSet*)value_;
+- (void)addCommentsObject:(TLComment*)value_;
+- (void)removeCommentsObject:(TLComment*)value_;
+
 @end
 
 @interface _TLCommit (CoreDataGeneratedPrimitiveAccessors)
@@ -73,8 +78,8 @@ extern const struct TLCommitFetchedProperties {
 
 
 
-- (TLComment*)primitiveComments;
-- (void)setPrimitiveComments:(TLComment*)value;
+- (NSMutableSet*)primitiveComments;
+- (void)setPrimitiveComments:(NSMutableSet*)value;
 
 
 

@@ -86,8 +86,7 @@
             date = [dateFormatter dateFromString:rfc3339String];
         }
 
-        if (!date)
-            NSLog(@"Could not parse RFC3339 date: \"%@\" Possible invalid format.", dateString);
+        ZAssert(date, @"Could not parse RFC3339 date: \"%@\" Possible invalid format.", dateString);
     }
 
     return date;

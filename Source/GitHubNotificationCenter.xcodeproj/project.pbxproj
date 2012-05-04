@@ -93,6 +93,7 @@
 		2F48A4A515541488006F2750 /* NSManagedObjectContext+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+Extensions.m"; sourceTree = "<group>"; };
 		2FB6D15215541A5500D9D937 /* NSDateFormatter+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+Extensions.h"; sourceTree = "<group>"; };
 		2FB6D15315541A5500D9D937 /* NSDateFormatter+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+Extensions.m"; sourceTree = "<group>"; };
+		2FB6D16415541FF300D9D937 /* TLMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMacros.h; sourceTree = "<group>"; };
 		2FDB9F4F1553F7AE00CB7487 /* GitHubNotificationCenter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubNotificationCenter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FDB9F531553F7AE00CB7487 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2FDB9F561553F7AE00CB7487 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -245,6 +246,7 @@
 				E5867AF915540F1100A7E61D /* TLGitHubAPI.m */,
 				2FDB9F791553F87500CB7487 /* main.m */,
 				2FDB9F7A1553F87500CB7487 /* TLAppDelegate.h */,
+				2FB6D16415541FF300D9D937 /* TLMacros.h */,
 				2FDB9F7B1553F87500CB7487 /* TLAppDelegate.m */,
 			);
 			path = Classes;

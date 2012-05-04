@@ -10,4 +10,22 @@
 
 @interface TLManagedObject : NSManagedObject
 
+
++ (NSArray *)fetchEntitiesWithPredicate:(NSPredicate *)predicate
+                                  limit:(NSUInteger)fetchLimit
+                    includesSubentities:(BOOL)includesSubentities
+                        sortDescriptors:(NSArray *)sortDescriptors
+                   managedObjectContext:(NSManagedObjectContext *)moc;
+
++ (NSArray *)fetchEntitiesWithPredicate:(NSPredicate *)predicate
+                        sortDescriptors:(NSArray *)sortDescriptors
+                   managedObjectContext:(NSManagedObjectContext *)moc;
+
++ (NSArray *)fetchEntitiesWithPredicate:(NSPredicate *)predicate
+                   managedObjectContext:(NSManagedObjectContext *)moc;
+
++ (id)fetchEntityWithPredicate:(NSPredicate *)predicate
+          managedObjectContext:(NSManagedObjectContext *)moc;
+
+
 @end

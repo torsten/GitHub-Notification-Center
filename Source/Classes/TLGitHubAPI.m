@@ -51,7 +51,25 @@
 
 - (void)generateDummiesIntoMOC:(NSManagedObjectContext *)moc
 {
-    // TLPullRequest *pullRequest = [TLPullRequest insertInManagedObjectContext:moc];
+    TLAuthor *author = [TLAuthor fetchOrCreateWithEmail:@"lars@lars.com" managedObjectContext:moc];
+
+
+    TLPullRequest *pullRequest = [TLPullRequest fetchOrCreateWithID:@"xxxPullRequest" managedObjectContext:moc];
+
+    TLComment *pullRequestComment = [TLComment fetchOrCreateWithID:@"xxxPullRequestComment" managedObjectContext:moc];
+    pullRequestComment.message = @"laber rababer pull request";
+    [pullRequest addCommentsObject:pullRequestComment];
+
+
+    TLCommit *commit = [TLCommit fetchOrCreateWithID:@"123commit" managedObjectContext:moc];
+
+    TLComment *commitComment = [TLComment  fetchOrCreateWithID:@"123commitComment" managedObjectContext:moc];
+    commitComment.message = @"commit comment";
+    [commit addCommentsObject:commitComment];
+
+    [pullRequest addCommitsObject:commit];
+
+    [moc saveChanges];
 }
 
 
@@ -68,22 +86,22 @@
             {
                 // TLAuthor:
                 // avatarURL, email, name
-                
+
                 // TLPullRequest *pullRequest = [TLPullRequest insertInManagedObjectContext:moc];
-                
-                // date, url, (author), 
+
+                // date, url, (author),
                 // label, comments, commits
-                
+
                 // pullRequest.text = self.editingView.textView.text;
                 // pullRequest.tags = self.tagsForNewNote;
                 // pullRequest.owner = [WKWorkspace personalWorkspace];
                 // pullRequest.workspace = self.workspace;
                 // pullRequest.orderIndexValue = self.note.newOrderIndex;
-               
+
 //                TLPullRequest *pullRequest = [TLPullRequest ];
 
-                
-                
+
+
                 NSString *url = [dict objectForKey:@"html_url"];
                 NSString *date = [dict objectForKey:@"created_at"]; // 2012-05-03T17:22:24Z
                 NSString *label = [dict objectForKey:@"title"];
@@ -93,8 +111,8 @@
                 NSLog(@" - pull#: %d", number);
                 NSLog(@" - date: %@", date);
                 NSLog(@" - url: %@", url);
-                
-                
+
+
                 // user =     {
                 //     "avatar_url" = "https://secure.gravatar.com/avatar/7bce86ef594d03d98383f9a9d842d32d?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png";
                 //     "gravatar_id" = 7bce86ef594d03d98383f9a9d842d32d;
