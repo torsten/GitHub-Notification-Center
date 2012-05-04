@@ -88,10 +88,10 @@
                 NSString *url = [dict objectForKey:@"html_url"];
                 NSString *date = [dict objectForKey:@"created_at"]; // 2012-05-03T17:22:24Z
                 NSString *label = [dict objectForKey:@"title"];
-                NSString *number = [dict objectForKey:@"number"];
+                int number = [[dict objectForKey:@"number"] intValue];
                 
                 NSLog(@" - label: %@", label);
-                NSLog(@" - pull#: %@", number);
+                NSLog(@" - pull#: %d", number);
                 NSLog(@" - date: %@", date);
                 NSLog(@" - url: %@", url);
                 
@@ -105,6 +105,8 @@
                 // };
                 NSDictionary *userDict = [dict objectForKey:@"user"];
                 
+                [self updateCommentsForPullRequest:number inRepo:repo];
+                
                 
 //                NSLog(@" - dict: %@", dict);
             }
@@ -116,6 +118,36 @@
     }
 }
 
+
+- (void)updateCommentsForPullRequest:(int)pullRequestId inRepo:(NSString *)repo
+{
+    [self.engine commentsForIssue:pullRequestId forRepository:repo
+    success:^(id thing)
+    {
+        NSLog(@"pull comment success: (%@) %@", [thing class], thing);
+        // (__NSArrayM) (
+        //         {
+        //         body = "Test comment on pull request";
+        //         "created_at" = "2012-05-04T11:20:29Z";
+        //         id = 5508406;
+        //         "updated_at" = "2012-05-04T11:21:55Z";
+        //         url = "https://api.github.com/repos/6wunderkinder/wunderkit-clientapi/issues/comments/5508406";
+        //         user =         {
+        //             "avatar_url" = "https://secure.gravatar.com/avatar/7bce86ef594d03d98383f9a9d842d32d?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png";
+        //             "gravatar_id" = 7bce86ef594d03d98383f9a9d842d32d;
+        //             id = 13548;
+        //             login = torsten;
+        //             url = "https://api.github.com/users/torsten";
+        //         };
+        //     }
+        // )
+        
+    }
+    failure:^(NSError * err)
+    {
+        NSLog(@"Pull comment fetch fail: %@", err);
+    }];
+}
 
 
 // [engine pullRequestsForRepository:@"6wunderkinder/wunderkit-clientapi"
@@ -153,15 +185,6 @@
 
 // [engine :(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock];
 
-// [engine commentsForIssue:34 forRepository:@"6wunderkinder/wunderkit-clientapi"
-//                      success:^(id thing)
-//                      {
-//                          NSLog(@"success: (%@) %@", [thing class], thing);
-//                      }
-//                      failure:^(NSError * err)
-//                      {
-//                          NSLog(@"fail: %@", err);
-//                      }];
 
 
 @end
