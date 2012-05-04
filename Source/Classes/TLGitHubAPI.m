@@ -6,7 +6,11 @@
 //  Copyright (c) 2012 6Wunderkinder. All rights reserved.
 //
 
+#import "TLAuthor.h"
+#import "TLComment.h"
+#import "TLCommit.h"
 #import "TLGitHubAPI.h"
+#import "TLPullRequest.h"
 #import <UAGithubEngine/UAGithubEngine.h>
 
 
@@ -44,7 +48,6 @@
     return self;
 }
 
-
 - (void)updateIntoMOC:(NSManagedObjectContext *)moc
 {
     for (NSString *repo in self.reposToWatch)
@@ -57,9 +60,44 @@
 
             for (NSDictionary *dict in pullRequests)
             {
+                // TLAuthor:
+                // avatarURL, email, name
+                
+                // TLPullRequest *pullRequest = [TLPullRequest insertInManagedObjectContext:moc];
+                
+                // date, url, (author), 
+                // label, comments, commits
+                
+                // pullRequest.text = self.editingView.textView.text;
+                // pullRequest.tags = self.tagsForNewNote;
+                // pullRequest.owner = [WKWorkspace personalWorkspace];
+                // pullRequest.workspace = self.workspace;
+                // pullRequest.orderIndexValue = self.note.newOrderIndex;
+                
+                
+                NSString *url = [dict objectForKey:@"html_url"];
+                NSString *date = [dict objectForKey:@"created_at"]; // 2012-05-03T17:22:24Z
+                NSString *label = [dict objectForKey:@"title"];
+                NSString *label
+                
+                NSLog(@" - label: %@", label);
+                NSLog(@" - pull#: %@", url);
+                NSLog(@" - date: %@", date);
+                NSLog(@" - url: %@", url);
+                
+                
+                // user =     {
+                //     "avatar_url" = "https://secure.gravatar.com/avatar/7bce86ef594d03d98383f9a9d842d32d?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png";
+                //     "gravatar_id" = 7bce86ef594d03d98383f9a9d842d32d;
+                //     id = 13548;
+                //     login = torsten;
+                //     url = "https://api.github.com/users/torsten";
+                // };
+                NSDictionary *userDict = [dict objectForKey:@"user"];
+                
+                
                 NSLog(@" - dict: %@", dict);
             }
-            
         }
         failure:^(NSError * err)
         {
