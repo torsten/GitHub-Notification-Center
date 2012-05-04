@@ -27,7 +27,6 @@
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize api = _api;
 
-
 @synthesize splitView;
 @synthesize masterView;
 @synthesize detailView;
