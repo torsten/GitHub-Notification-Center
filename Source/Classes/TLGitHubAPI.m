@@ -15,9 +15,14 @@
 #import <UAGithubEngine/UAGithubEngine.h>
 
 
+// ------------------------------------------------------------------------------------------
+
+
 @interface TLGitHubAPI ()
 
 @property (nonatomic, strong) UAGithubEngine *engine;
+
+/** NSArray of NSStrings */
 @property (nonatomic, strong) NSArray *reposToWatch;
 
 @end
@@ -50,30 +55,23 @@
 }
 
 
-- (void)generateDummiesIntoMOC:(NSManagedObjectContext *)moc
+- (TLAuthor *)authorWithDict:(NSDictionary *)userDict intoMOC:(NSManagedObjectContext *)moc
 {
-    TLAuthor *author = [TLAuthor fetchOrCreateWithID:@"githubID" managedObjectContext:moc];
-    author.name = @"Lars Schneider";
-    author.avatarURL = @"https://secure.gravatar.com/avatar/4e2a3b00174ca6190261d1d6cf41be2a?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-orgs.png";
+    // user =     {
+    //     "avatar_url" = "https://secure.gravatar.com/avatar/7bc...";
+    //     "gravatar_id" = 7bce86ef594d03d98383f9a9d842d32d;
+    //     id = 13548;
+    //     login = torsten;
+    //     url = "https://api.github.com/users/torsten";
+    // };
 
-    TLPullRequest *pullRequest = [TLPullRequest fetchOrCreateWithID:@"xxxPullRequest" managedObjectContext:moc];
-    pullRequest.numberValue = 11;
-    pullRequest.label = @"My new pull request";
+    TLAuthor *author = [TLAuthor fetchOrCreateWithID:[[userDict objectForKey:@"id"] stringValue]
+                                managedObjectContext:moc];
+    author.name = [userDict objectForKey:@"login"];
+    author.avatarURL = [userDict objectForKey:@"avatar_url"];
+    author.url = [NSString stringWithFormat:@"https://github.com/%@", author.name];
 
-    TLComment *pullRequestComment = [TLComment fetchOrCreateWithID:@"xxxPullRequestComment" managedObjectContext:moc];
-    pullRequestComment.message = @"laber rababer pull request";
-    [pullRequest addCommentsObject:pullRequestComment];
-
-
-    TLCommit *commit = [TLCommit fetchOrCreateWithID:@"123commit" managedObjectContext:moc];
-
-    TLComment *commitComment = [TLComment  fetchOrCreateWithID:@"123commitComment" managedObjectContext:moc];
-    commitComment.message = @"commit comment";
-    [commit addCommentsObject:commitComment];
-
-    [pullRequest addCommitsObject:commit];
-
-    [moc saveChanges];
+    return author;
 }
 
 
@@ -81,8 +79,7 @@
 {
     for (NSString *repo in self.reposToWatch)
     {
-        [self.engine pullRequestsForRepository:repo
-        success:^(id thing)
+        [self.engine pullRequestsForRepository:repo success:^(id thing)
         {
             // NSLog(@"pull req success: (%@) %@", [thing class], thing);
 
@@ -102,13 +99,6 @@
                 NSLog(@" - url: %@", url);
                 NSLog(@" - id: %@", gitHubId);
 
-                // user =     {
-                //     "avatar_url" = "https://secure.gravatar.com/avatar/7bce86ef594d03d98383f9a9d842d32d?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png";
-                //     "gravatar_id" = 7bce86ef594d03d98383f9a9d842d32d;
-                //     id = 13548;
-                //     login = torsten;
-                //     url = "https://api.github.com/users/torsten";
-                // };
                 NSDictionary *userDict = [dict objectForKey:@"user"];
 
                 TLAuthor *author = [self authorWithDict:userDict intoMOC:moc];
@@ -133,15 +123,6 @@
     }
 }
 
-- (TLAuthor *)authorWithDict:(NSDictionary *)userDict intoMOC:(NSManagedObjectContext *)moc
-{
-    TLAuthor *author = [TLAuthor fetchOrCreateWithID:[[userDict objectForKey:@"id"] stringValue] managedObjectContext:moc];
-    author.name = [userDict objectForKey:@"login"];
-    author.avatarURL = [userDict objectForKey:@"avatar_url"];
-    author.url = [NSString stringWithFormat:@"http://github.com/%@", author.name];
-
-    return author;
-}
 
 - (void)updateCommentsForPullRequest:(TLPullRequest *)pullRequest
                               inRepo:(NSString *)repo

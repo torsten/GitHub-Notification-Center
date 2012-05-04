@@ -7,12 +7,11 @@
 //
 
 
-/** Our thing wrapper around UAGithubEngine */
+/** Our thin wrapper around UAGithubEngine */
 @interface TLGitHubAPI : NSObject
 
+/** Creates a new API wrapper with user, password, and repos to watch from NSUserDefaults. */
 - (id)init;
-
-- (void)generateDummiesIntoMOC:(NSManagedObjectContext *)moc;
 
 /** Recursively fetches all pull requests stores in CoreData */
 - (void)updateIntoMOC:(NSManagedObjectContext *)moc;
