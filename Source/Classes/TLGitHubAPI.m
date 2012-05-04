@@ -118,11 +118,11 @@
                 pullRequest.author = author;
                 pullRequest.url = url;
 
-                [moc saveChanges];
-
                 [self updateCommentsForPullRequest:pullRequest inRepo:repo intoMOC:moc];
                 [self updateCommitsForPullRequest:pullRequest inRepo:repo intoMOC:moc];
             }
+
+            [moc saveChanges];
         }
         failure:^(NSError * err)
         {
@@ -186,9 +186,9 @@
             pullRequestComment.author = author;
 
             [pullRequest addCommentsObject:pullRequestComment];
-
-            [moc saveChanges];
         }
+
+        [moc saveChanges];
     }
     failure:^(NSError * err)
     {
@@ -266,8 +266,17 @@
             NSLog(@"   - message: %@", message);
             NSLog(@"   - date: %@", date);
 
-            [self updateCommentsForCommit:sha inRepo:repo intoMOC:moc];
+            TLCommit *commit = [TLCommit fetchOrCreateWithID:sha managedObjectContext:moc];
+            commit.message = message;
+            commit.url = [NSString stringWithFormat:@"https://github.com/%@/commit/%@", repo, sha];
+            // commit.date = ...;
+
+            [pullRequest addCommitsObject:commit];
+
+            [self updateCommentsForCommit:commit inRepo:repo intoMOC:moc];
         }
+
+        [moc saveChanges];
     }
     failure:^(NSError * err)
     {
@@ -276,10 +285,12 @@
 }
 
 
-- (void)updateCommentsForCommit:(NSString *)sha // TODO: Make this TLCommit
+- (void)updateCommentsForCommit:(TLCommit *)commit
                          inRepo:(NSString *)repo
                         intoMOC:(NSManagedObjectContext *)moc
 {
+    NSString *sha = commit.githubID;
+
     [self.engine commitCommentsForCommit:sha inRepository:repo
     success:^(id thing)
     {
@@ -315,13 +326,24 @@
         //     }
         // )
 
-
         NSArray *commitComments = (NSArray *)thing;
 
         for (NSDictionary *dict in commitComments)
         {
+            NSString *message = [dict objectForKey:@"body"];
+            NSString *githubID = [[dict objectForKey:@"id"] stringValue];
+            NSString *date = [dict objectForKey:@"updated_at"];
 
+            TLComment *commitComment = [TLComment fetchOrCreateWithID:githubID managedObjectContext:moc];
+            commitComment.message = message;
+            commitComment.url = [NSString stringWithFormat:@"https://github.com/%@/commit/%@#commitcomment-%@",
+                                                           repo, sha, githubID];
+            // commitComment.date = ...;
+
+            [commit addCommentsObject:commitComment];
         }
+
+        [moc saveChanges];
     }
     failure:^(NSError * err)
     {
