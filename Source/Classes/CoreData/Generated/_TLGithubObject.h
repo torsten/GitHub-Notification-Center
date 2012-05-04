@@ -5,8 +5,9 @@
 #import "TLManagedObject.h"
 
 extern const struct TLGithubObjectAttributes {
-	__unsafe_unretained NSString *date;
+	__unsafe_unretained NSString *created_at;
 	__unsafe_unretained NSString *githubID;
+	__unsafe_unretained NSString *updated_at;
 	__unsafe_unretained NSString *url;
 } TLGithubObjectAttributes;
 
@@ -18,6 +19,7 @@ extern const struct TLGithubObjectFetchedProperties {
 } TLGithubObjectFetchedProperties;
 
 @class TLAuthor;
+
 
 
 
@@ -35,10 +37,10 @@ extern const struct TLGithubObjectFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSDate* date;
+@property (nonatomic, strong) NSDate* created_at;
 
 
-//- (BOOL)validateDate:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateCreated_at:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -47,6 +49,14 @@ extern const struct TLGithubObjectFetchedProperties {
 
 
 //- (BOOL)validateGithubID:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSDate* updated_at;
+
+
+//- (BOOL)validateUpdated_at:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -77,14 +87,20 @@ extern const struct TLGithubObjectFetchedProperties {
 @interface _TLGithubObject (CoreDataGeneratedPrimitiveAccessors)
 
 
-- (NSDate*)primitiveDate;
-- (void)setPrimitiveDate:(NSDate*)value;
+- (NSDate*)primitiveCreated_at;
+- (void)setPrimitiveCreated_at:(NSDate*)value;
 
 
 
 
 - (NSString*)primitiveGithubID;
 - (void)setPrimitiveGithubID:(NSString*)value;
+
+
+
+
+- (NSDate*)primitiveUpdated_at;
+- (void)setPrimitiveUpdated_at:(NSDate*)value;
 
 
 

@@ -7,30 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F48A49815541289006F2750 /* TLAuthor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A48215541289006F2750 /* TLAuthor.m */; };
-		2F48A49915541289006F2750 /* TLComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A48415541289006F2750 /* TLComment.m */; };
-		2F48A49A15541289006F2750 /* TLCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A48615541289006F2750 /* TLCommit.m */; };
-		2F48A49B15541289006F2750 /* TLGithubObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A48815541289006F2750 /* TLGithubObject.m */; };
-		2F48A49C15541289006F2750 /* TLManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A48A15541289006F2750 /* TLManagedObject.m */; };
-		2F48A49D15541289006F2750 /* TLPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A48C15541289006F2750 /* TLPullRequest.m */; };
-		2F48A49E15541289006F2750 /* _TLAuthor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A48F15541289006F2750 /* _TLAuthor.m */; };
-		2F48A49F15541289006F2750 /* _TLComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A49115541289006F2750 /* _TLComment.m */; };
-		2F48A4A015541289006F2750 /* _TLCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A49315541289006F2750 /* _TLCommit.m */; };
-		2F48A4A115541289006F2750 /* _TLGithubObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A49515541289006F2750 /* _TLGithubObject.m */; };
-		2F48A4A215541289006F2750 /* _TLPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A49715541289006F2750 /* _TLPullRequest.m */; };
-		2F48A4A615541488006F2750 /* NSManagedObjectContext+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A4A515541488006F2750 /* NSManagedObjectContext+Extensions.m */; };
-		2FB6D15415541A5500D9D937 /* NSDateFormatter+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D15315541A5500D9D937 /* NSDateFormatter+Extensions.m */; };
+		2FB6D2061554410200D9D937 /* TLAuthor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D1DF1554410200D9D937 /* TLAuthor.m */; };
+		2FB6D2071554410200D9D937 /* TLComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D1E11554410200D9D937 /* TLComment.m */; };
+		2FB6D2081554410200D9D937 /* TLCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D1E31554410200D9D937 /* TLCommit.m */; };
+		2FB6D2091554410200D9D937 /* TLGithubObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D1E51554410200D9D937 /* TLGithubObject.m */; };
+		2FB6D20A1554410200D9D937 /* TLManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D1E71554410200D9D937 /* TLManagedObject.m */; };
+		2FB6D20B1554410200D9D937 /* TLPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D1E91554410200D9D937 /* TLPullRequest.m */; };
+		2FB6D20C1554410200D9D937 /* TLRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D1EB1554410200D9D937 /* TLRepository.m */; };
+		2FB6D20D1554410200D9D937 /* _TLAuthor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D1EE1554410200D9D937 /* _TLAuthor.m */; };
+		2FB6D20E1554410200D9D937 /* _TLComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D1F01554410200D9D937 /* _TLComment.m */; };
+		2FB6D20F1554410200D9D937 /* _TLCommit.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D1F21554410200D9D937 /* _TLCommit.m */; };
+		2FB6D2101554410200D9D937 /* _TLGithubObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D1F41554410200D9D937 /* _TLGithubObject.m */; };
+		2FB6D2111554410200D9D937 /* _TLPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D1F61554410200D9D937 /* _TLPullRequest.m */; };
+		2FB6D2121554410200D9D937 /* _TLRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D1F81554410200D9D937 /* _TLRepository.m */; };
+		2FB6D2131554410200D9D937 /* NSDateFormatter+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D1FB1554410200D9D937 /* NSDateFormatter+Extensions.m */; };
+		2FB6D2141554410200D9D937 /* NSManagedObjectContext+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D1FD1554410200D9D937 /* NSManagedObjectContext+Extensions.m */; };
+		2FB6D2151554410200D9D937 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D1FE1554410200D9D937 /* main.m */; };
+		2FB6D2161554410200D9D937 /* TLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D2001554410200D9D937 /* TLAppDelegate.m */; };
+		2FB6D2171554410200D9D937 /* TLGitHubAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D2021554410200D9D937 /* TLGitHubAPI.m */; };
+		2FB6D2181554410200D9D937 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D2051554410200D9D937 /* WebViewController.m */; };
 		2FDB9F541553F7AE00CB7487 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDB9F531553F7AE00CB7487 /* Cocoa.framework */; };
-		2FDB9F871553F87500CB7487 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB9F791553F87500CB7487 /* main.m */; };
-		2FDB9F881553F87500CB7487 /* TLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB9F7B1553F87500CB7487 /* TLAppDelegate.m */; };
 		2FDB9F8A1553F87500CB7487 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 2FDB9F7F1553F87500CB7487 /* Credits.rtf */; };
 		2FDB9F8B1553F87500CB7487 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FDB9F811553F87500CB7487 /* InfoPlist.strings */; };
 		2FDB9F8C1553F87500CB7487 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDB9F831553F87500CB7487 /* MainMenu.xib */; };
 		2FDB9F8D1553F87500CB7487 /* GitHubNotificationCenter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB9F851553F87500CB7487 /* GitHubNotificationCenter.xcdatamodeld */; };
-		8F557F771554175300923D02 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F557F761554175300923D02 /* WebViewController.m */; };
 		8F557F79155417A500923D02 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F557F78155417A500923D02 /* WebKit.framework */; };
 		E5867AF7155400FB00A7E61D /* UAGithubEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5867AF5155400E800A7E61D /* UAGithubEngine.framework */; };
-		E5867AFA15540F1100A7E61D /* TLGitHubAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = E5867AF915540F1100A7E61D /* TLGitHubAPI.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -67,53 +69,57 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2F48A48115541289006F2750 /* TLAuthor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLAuthor.h; sourceTree = "<group>"; };
-		2F48A48215541289006F2750 /* TLAuthor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLAuthor.m; sourceTree = "<group>"; };
-		2F48A48315541289006F2750 /* TLComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLComment.h; sourceTree = "<group>"; };
-		2F48A48415541289006F2750 /* TLComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLComment.m; sourceTree = "<group>"; };
-		2F48A48515541289006F2750 /* TLCommit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLCommit.h; sourceTree = "<group>"; };
-		2F48A48615541289006F2750 /* TLCommit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLCommit.m; sourceTree = "<group>"; };
-		2F48A48715541289006F2750 /* TLGithubObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLGithubObject.h; sourceTree = "<group>"; };
-		2F48A48815541289006F2750 /* TLGithubObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLGithubObject.m; sourceTree = "<group>"; };
-		2F48A48915541289006F2750 /* TLManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLManagedObject.h; sourceTree = "<group>"; };
-		2F48A48A15541289006F2750 /* TLManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLManagedObject.m; sourceTree = "<group>"; };
-		2F48A48B15541289006F2750 /* TLPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLPullRequest.h; sourceTree = "<group>"; };
-		2F48A48C15541289006F2750 /* TLPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLPullRequest.m; sourceTree = "<group>"; };
-		2F48A48E15541289006F2750 /* _TLAuthor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TLAuthor.h; sourceTree = "<group>"; };
-		2F48A48F15541289006F2750 /* _TLAuthor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLAuthor.m; sourceTree = "<group>"; };
-		2F48A49015541289006F2750 /* _TLComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TLComment.h; sourceTree = "<group>"; };
-		2F48A49115541289006F2750 /* _TLComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLComment.m; sourceTree = "<group>"; };
-		2F48A49215541289006F2750 /* _TLCommit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TLCommit.h; sourceTree = "<group>"; };
-		2F48A49315541289006F2750 /* _TLCommit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLCommit.m; sourceTree = "<group>"; };
-		2F48A49415541289006F2750 /* _TLGithubObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TLGithubObject.h; sourceTree = "<group>"; };
-		2F48A49515541289006F2750 /* _TLGithubObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLGithubObject.m; sourceTree = "<group>"; };
-		2F48A49615541289006F2750 /* _TLPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TLPullRequest.h; sourceTree = "<group>"; };
-		2F48A49715541289006F2750 /* _TLPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLPullRequest.m; sourceTree = "<group>"; };
-		2F48A4A415541488006F2750 /* NSManagedObjectContext+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+Extensions.h"; sourceTree = "<group>"; };
-		2F48A4A515541488006F2750 /* NSManagedObjectContext+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+Extensions.m"; sourceTree = "<group>"; };
-		2FB6D15215541A5500D9D937 /* NSDateFormatter+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+Extensions.h"; sourceTree = "<group>"; };
-		2FB6D15315541A5500D9D937 /* NSDateFormatter+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+Extensions.m"; sourceTree = "<group>"; };
-		2FB6D16415541FF300D9D937 /* TLMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMacros.h; sourceTree = "<group>"; };
+		2FB6D1DE1554410200D9D937 /* TLAuthor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLAuthor.h; sourceTree = "<group>"; };
+		2FB6D1DF1554410200D9D937 /* TLAuthor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLAuthor.m; sourceTree = "<group>"; };
+		2FB6D1E01554410200D9D937 /* TLComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLComment.h; sourceTree = "<group>"; };
+		2FB6D1E11554410200D9D937 /* TLComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLComment.m; sourceTree = "<group>"; };
+		2FB6D1E21554410200D9D937 /* TLCommit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLCommit.h; sourceTree = "<group>"; };
+		2FB6D1E31554410200D9D937 /* TLCommit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLCommit.m; sourceTree = "<group>"; };
+		2FB6D1E41554410200D9D937 /* TLGithubObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLGithubObject.h; sourceTree = "<group>"; };
+		2FB6D1E51554410200D9D937 /* TLGithubObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLGithubObject.m; sourceTree = "<group>"; };
+		2FB6D1E61554410200D9D937 /* TLManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLManagedObject.h; sourceTree = "<group>"; };
+		2FB6D1E71554410200D9D937 /* TLManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLManagedObject.m; sourceTree = "<group>"; };
+		2FB6D1E81554410200D9D937 /* TLPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLPullRequest.h; sourceTree = "<group>"; };
+		2FB6D1E91554410200D9D937 /* TLPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLPullRequest.m; sourceTree = "<group>"; };
+		2FB6D1EA1554410200D9D937 /* TLRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLRepository.h; sourceTree = "<group>"; };
+		2FB6D1EB1554410200D9D937 /* TLRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLRepository.m; sourceTree = "<group>"; };
+		2FB6D1ED1554410200D9D937 /* _TLAuthor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TLAuthor.h; sourceTree = "<group>"; };
+		2FB6D1EE1554410200D9D937 /* _TLAuthor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLAuthor.m; sourceTree = "<group>"; };
+		2FB6D1EF1554410200D9D937 /* _TLComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TLComment.h; sourceTree = "<group>"; };
+		2FB6D1F01554410200D9D937 /* _TLComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLComment.m; sourceTree = "<group>"; };
+		2FB6D1F11554410200D9D937 /* _TLCommit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TLCommit.h; sourceTree = "<group>"; };
+		2FB6D1F21554410200D9D937 /* _TLCommit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLCommit.m; sourceTree = "<group>"; };
+		2FB6D1F31554410200D9D937 /* _TLGithubObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TLGithubObject.h; sourceTree = "<group>"; };
+		2FB6D1F41554410200D9D937 /* _TLGithubObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLGithubObject.m; sourceTree = "<group>"; };
+		2FB6D1F51554410200D9D937 /* _TLPullRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TLPullRequest.h; sourceTree = "<group>"; };
+		2FB6D1F61554410200D9D937 /* _TLPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLPullRequest.m; sourceTree = "<group>"; };
+		2FB6D1F71554410200D9D937 /* _TLRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _TLRepository.h; sourceTree = "<group>"; };
+		2FB6D1F81554410200D9D937 /* _TLRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLRepository.m; sourceTree = "<group>"; };
+		2FB6D1FA1554410200D9D937 /* NSDateFormatter+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+Extensions.h"; sourceTree = "<group>"; };
+		2FB6D1FB1554410200D9D937 /* NSDateFormatter+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+Extensions.m"; sourceTree = "<group>"; };
+		2FB6D1FC1554410200D9D937 /* NSManagedObjectContext+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+Extensions.h"; sourceTree = "<group>"; };
+		2FB6D1FD1554410200D9D937 /* NSManagedObjectContext+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+Extensions.m"; sourceTree = "<group>"; };
+		2FB6D1FE1554410200D9D937 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2FB6D1FF1554410200D9D937 /* TLAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLAppDelegate.h; sourceTree = "<group>"; };
+		2FB6D2001554410200D9D937 /* TLAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLAppDelegate.m; sourceTree = "<group>"; };
+		2FB6D2011554410200D9D937 /* TLGitHubAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLGitHubAPI.h; sourceTree = "<group>"; };
+		2FB6D2021554410200D9D937 /* TLGitHubAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLGitHubAPI.m; sourceTree = "<group>"; };
+		2FB6D2031554410200D9D937 /* TLMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLMacros.h; sourceTree = "<group>"; };
+		2FB6D2041554410200D9D937 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		2FB6D2051554410200D9D937 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		2FDB9F4F1553F7AE00CB7487 /* GitHubNotificationCenter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubNotificationCenter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FDB9F531553F7AE00CB7487 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2FDB9F561553F7AE00CB7487 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		2FDB9F571553F7AE00CB7487 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2FDB9F581553F7AE00CB7487 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		2FDB9F791553F87500CB7487 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2FDB9F7A1553F87500CB7487 /* TLAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLAppDelegate.h; sourceTree = "<group>"; };
-		2FDB9F7B1553F87500CB7487 /* TLAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLAppDelegate.m; sourceTree = "<group>"; };
 		2FDB9F7C1553F87500CB7487 /* GitHubNotificationCenter-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GitHubNotificationCenter-Info.plist"; sourceTree = "<group>"; };
 		2FDB9F7D1553F87500CB7487 /* GitHubNotificationCenter-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GitHubNotificationCenter-Prefix.pch"; sourceTree = "<group>"; };
 		2FDB9F801553F87500CB7487 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		2FDB9F821553F87500CB7487 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2FDB9F841553F87500CB7487 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		2FDB9F861553F87500CB7487 /* GitHubNotificationCenter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitHubNotificationCenter.xcdatamodel; sourceTree = "<group>"; };
-		8F557F751554175300923D02 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
-		8F557F761554175300923D02 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		8F557F78155417A500923D02 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		E5867AED155400E800A7E61D /* UAGithubEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UAGithubEngine.xcodeproj; path = Libraries/UAGithubEngine/UAGithubEngine.xcodeproj; sourceTree = "<group>"; };
-		E5867AF815540F1100A7E61D /* TLGitHubAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLGitHubAPI.h; sourceTree = "<group>"; };
-		E5867AF915540F1100A7E61D /* TLGitHubAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLGitHubAPI.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,62 +136,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2F48A47F15541289006F2750 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				2F48A48015541289006F2750 /* Entities */,
-				2F48A48D15541289006F2750 /* Generated */,
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
-		2F48A48015541289006F2750 /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				2F48A48115541289006F2750 /* TLAuthor.h */,
-				2F48A48215541289006F2750 /* TLAuthor.m */,
-				2F48A48315541289006F2750 /* TLComment.h */,
-				2F48A48415541289006F2750 /* TLComment.m */,
-				2F48A48515541289006F2750 /* TLCommit.h */,
-				2F48A48615541289006F2750 /* TLCommit.m */,
-				2F48A48715541289006F2750 /* TLGithubObject.h */,
-				2F48A48815541289006F2750 /* TLGithubObject.m */,
-				2F48A48915541289006F2750 /* TLManagedObject.h */,
-				2F48A48A15541289006F2750 /* TLManagedObject.m */,
-				2F48A48B15541289006F2750 /* TLPullRequest.h */,
-				2F48A48C15541289006F2750 /* TLPullRequest.m */,
-			);
-			path = Entities;
-			sourceTree = "<group>";
-		};
-		2F48A48D15541289006F2750 /* Generated */ = {
-			isa = PBXGroup;
-			children = (
-				2F48A48E15541289006F2750 /* _TLAuthor.h */,
-				2F48A48F15541289006F2750 /* _TLAuthor.m */,
-				2F48A49015541289006F2750 /* _TLComment.h */,
-				2F48A49115541289006F2750 /* _TLComment.m */,
-				2F48A49215541289006F2750 /* _TLCommit.h */,
-				2F48A49315541289006F2750 /* _TLCommit.m */,
-				2F48A49415541289006F2750 /* _TLGithubObject.h */,
-				2F48A49515541289006F2750 /* _TLGithubObject.m */,
-				2F48A49615541289006F2750 /* _TLPullRequest.h */,
-				2F48A49715541289006F2750 /* _TLPullRequest.m */,
-			);
-			path = Generated;
-			sourceTree = "<group>";
-		};
-		2F48A4A315541488006F2750 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				2FB6D15215541A5500D9D937 /* NSDateFormatter+Extensions.h */,
-				2FB6D15315541A5500D9D937 /* NSDateFormatter+Extensions.m */,
-				2F48A4A415541488006F2750 /* NSManagedObjectContext+Extensions.h */,
-				2F48A4A515541488006F2750 /* NSManagedObjectContext+Extensions.m */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		2FB6D15515541A7C00D9D937 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,10 +144,87 @@
 			name = Libraries;
 			sourceTree = "<group>";
 		};
+		2FB6D1DB1554410200D9D937 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				2FB6D1DC1554410200D9D937 /* CoreData */,
+				2FB6D1F91554410200D9D937 /* Extensions */,
+				2FB6D1FE1554410200D9D937 /* main.m */,
+				2FB6D1FF1554410200D9D937 /* TLAppDelegate.h */,
+				2FB6D2001554410200D9D937 /* TLAppDelegate.m */,
+				2FB6D2011554410200D9D937 /* TLGitHubAPI.h */,
+				2FB6D2021554410200D9D937 /* TLGitHubAPI.m */,
+				2FB6D2031554410200D9D937 /* TLMacros.h */,
+				2FB6D2041554410200D9D937 /* WebViewController.h */,
+				2FB6D2051554410200D9D937 /* WebViewController.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		2FB6D1DC1554410200D9D937 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				2FB6D1DD1554410200D9D937 /* Entities */,
+				2FB6D1EC1554410200D9D937 /* Generated */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		2FB6D1DD1554410200D9D937 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				2FB6D1DE1554410200D9D937 /* TLAuthor.h */,
+				2FB6D1DF1554410200D9D937 /* TLAuthor.m */,
+				2FB6D1E01554410200D9D937 /* TLComment.h */,
+				2FB6D1E11554410200D9D937 /* TLComment.m */,
+				2FB6D1E21554410200D9D937 /* TLCommit.h */,
+				2FB6D1E31554410200D9D937 /* TLCommit.m */,
+				2FB6D1E41554410200D9D937 /* TLGithubObject.h */,
+				2FB6D1E51554410200D9D937 /* TLGithubObject.m */,
+				2FB6D1E61554410200D9D937 /* TLManagedObject.h */,
+				2FB6D1E71554410200D9D937 /* TLManagedObject.m */,
+				2FB6D1E81554410200D9D937 /* TLPullRequest.h */,
+				2FB6D1E91554410200D9D937 /* TLPullRequest.m */,
+				2FB6D1EA1554410200D9D937 /* TLRepository.h */,
+				2FB6D1EB1554410200D9D937 /* TLRepository.m */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		2FB6D1EC1554410200D9D937 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				2FB6D1ED1554410200D9D937 /* _TLAuthor.h */,
+				2FB6D1EE1554410200D9D937 /* _TLAuthor.m */,
+				2FB6D1EF1554410200D9D937 /* _TLComment.h */,
+				2FB6D1F01554410200D9D937 /* _TLComment.m */,
+				2FB6D1F11554410200D9D937 /* _TLCommit.h */,
+				2FB6D1F21554410200D9D937 /* _TLCommit.m */,
+				2FB6D1F31554410200D9D937 /* _TLGithubObject.h */,
+				2FB6D1F41554410200D9D937 /* _TLGithubObject.m */,
+				2FB6D1F51554410200D9D937 /* _TLPullRequest.h */,
+				2FB6D1F61554410200D9D937 /* _TLPullRequest.m */,
+				2FB6D1F71554410200D9D937 /* _TLRepository.h */,
+				2FB6D1F81554410200D9D937 /* _TLRepository.m */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		2FB6D1F91554410200D9D937 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2FB6D1FA1554410200D9D937 /* NSDateFormatter+Extensions.h */,
+				2FB6D1FB1554410200D9D937 /* NSDateFormatter+Extensions.m */,
+				2FB6D1FC1554410200D9D937 /* NSManagedObjectContext+Extensions.h */,
+				2FB6D1FD1554410200D9D937 /* NSManagedObjectContext+Extensions.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		2FDB9F441553F7AE00CB7487 = {
 			isa = PBXGroup;
 			children = (
-				2FDB9F781553F87500CB7487 /* Classes */,
+				2FB6D1DB1554410200D9D937 /* Classes */,
 				2FB6D15515541A7C00D9D937 /* Libraries */,
 				2FDB9F7E1553F87500CB7487 /* Resources */,
 				2FDB9F7C1553F87500CB7487 /* GitHubNotificationCenter-Info.plist */,
@@ -233,23 +260,6 @@
 				2FDB9F581553F7AE00CB7487 /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
-			sourceTree = "<group>";
-		};
-		2FDB9F781553F87500CB7487 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				8F557F751554175300923D02 /* WebViewController.h */,
-				8F557F761554175300923D02 /* WebViewController.m */,
-				2F48A4A315541488006F2750 /* Extensions */,
-				2F48A47F15541289006F2750 /* CoreData */,
-				E5867AF815540F1100A7E61D /* TLGitHubAPI.h */,
-				E5867AF915540F1100A7E61D /* TLGitHubAPI.m */,
-				2FDB9F791553F87500CB7487 /* main.m */,
-				2FDB9F7A1553F87500CB7487 /* TLAppDelegate.h */,
-				2FB6D16415541FF300D9D937 /* TLMacros.h */,
-				2FDB9F7B1553F87500CB7487 /* TLAppDelegate.m */,
-			);
-			path = Classes;
 			sourceTree = "<group>";
 		};
 		2FDB9F7E1553F87500CB7487 /* Resources */ = {
@@ -354,24 +364,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FDB9F871553F87500CB7487 /* main.m in Sources */,
-				2FDB9F881553F87500CB7487 /* TLAppDelegate.m in Sources */,
 				2FDB9F8D1553F87500CB7487 /* GitHubNotificationCenter.xcdatamodeld in Sources */,
-				E5867AFA15540F1100A7E61D /* TLGitHubAPI.m in Sources */,
-				2F48A49815541289006F2750 /* TLAuthor.m in Sources */,
-				2F48A49915541289006F2750 /* TLComment.m in Sources */,
-				2F48A49A15541289006F2750 /* TLCommit.m in Sources */,
-				2F48A49B15541289006F2750 /* TLGithubObject.m in Sources */,
-				2F48A49C15541289006F2750 /* TLManagedObject.m in Sources */,
-				2F48A49D15541289006F2750 /* TLPullRequest.m in Sources */,
-				2F48A49E15541289006F2750 /* _TLAuthor.m in Sources */,
-				2F48A49F15541289006F2750 /* _TLComment.m in Sources */,
-				2F48A4A015541289006F2750 /* _TLCommit.m in Sources */,
-				2F48A4A115541289006F2750 /* _TLGithubObject.m in Sources */,
-				2F48A4A215541289006F2750 /* _TLPullRequest.m in Sources */,
-				2F48A4A615541488006F2750 /* NSManagedObjectContext+Extensions.m in Sources */,
-				8F557F771554175300923D02 /* WebViewController.m in Sources */,
-				2FB6D15415541A5500D9D937 /* NSDateFormatter+Extensions.m in Sources */,
+				2FB6D2061554410200D9D937 /* TLAuthor.m in Sources */,
+				2FB6D2071554410200D9D937 /* TLComment.m in Sources */,
+				2FB6D2081554410200D9D937 /* TLCommit.m in Sources */,
+				2FB6D2091554410200D9D937 /* TLGithubObject.m in Sources */,
+				2FB6D20A1554410200D9D937 /* TLManagedObject.m in Sources */,
+				2FB6D20B1554410200D9D937 /* TLPullRequest.m in Sources */,
+				2FB6D20C1554410200D9D937 /* TLRepository.m in Sources */,
+				2FB6D20D1554410200D9D937 /* _TLAuthor.m in Sources */,
+				2FB6D20E1554410200D9D937 /* _TLComment.m in Sources */,
+				2FB6D20F1554410200D9D937 /* _TLCommit.m in Sources */,
+				2FB6D2101554410200D9D937 /* _TLGithubObject.m in Sources */,
+				2FB6D2111554410200D9D937 /* _TLPullRequest.m in Sources */,
+				2FB6D2121554410200D9D937 /* _TLRepository.m in Sources */,
+				2FB6D2131554410200D9D937 /* NSDateFormatter+Extensions.m in Sources */,
+				2FB6D2141554410200D9D937 /* NSManagedObjectContext+Extensions.m in Sources */,
+				2FB6D2151554410200D9D937 /* main.m in Sources */,
+				2FB6D2161554410200D9D937 /* TLAppDelegate.m in Sources */,
+				2FB6D2171554410200D9D937 /* TLGitHubAPI.m in Sources */,
+				2FB6D2181554410200D9D937 /* WebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

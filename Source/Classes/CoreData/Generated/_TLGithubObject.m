@@ -4,8 +4,9 @@
 #import "_TLGithubObject.h"
 
 const struct TLGithubObjectAttributes TLGithubObjectAttributes = {
-	.date = @"date",
+	.created_at = @"created_at",
 	.githubID = @"githubID",
+	.updated_at = @"updated_at",
 	.url = @"url",
 };
 
@@ -49,7 +50,7 @@ const struct TLGithubObjectFetchedProperties TLGithubObjectFetchedProperties = {
 
 
 
-@dynamic date;
+@dynamic created_at;
 
 
 
@@ -57,6 +58,13 @@ const struct TLGithubObjectFetchedProperties TLGithubObjectFetchedProperties = {
 
 
 @dynamic githubID;
+
+
+
+
+
+
+@dynamic updated_at;
 
 
 

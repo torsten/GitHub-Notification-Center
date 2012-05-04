@@ -16,8 +16,9 @@
         <relationship name="pullRequest" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PullRequest" inverseName="commits" inverseEntity="PullRequest" syncable="YES"/>
     </entity>
     <entity name="GithubObject" representedClassName="TLGithubObject" isAbstract="YES" syncable="YES">
-        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="created_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="githubID" attributeType="String" syncable="YES"/>
+        <attribute name="updated_at" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="url" attributeType="String" syncable="YES"/>
         <relationship name="author" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Author" inverseName="githubObjects" inverseEntity="Author" syncable="YES"/>
     </entity>
@@ -28,11 +29,16 @@
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="pullRequest" inverseEntity="Comment" syncable="YES"/>
         <relationship name="commits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Commit" inverseName="pullRequest" inverseEntity="Commit" syncable="YES"/>
     </entity>
+    <entity name="Repository" representedClassName="TLRepository" parentEntity="GithubObject" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="repositoryDescription" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Author" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Author" positionX="160" positionY="192" width="128" height="105"/>
         <element name="Comment" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Commit" positionX="160" positionY="192" width="128" height="90"/>
         <element name="GithubObject" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="PullRequest" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="PullRequest" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Repository" positionX="160" positionY="192" width="128" height="75"/>
     </elements>
 </model>
