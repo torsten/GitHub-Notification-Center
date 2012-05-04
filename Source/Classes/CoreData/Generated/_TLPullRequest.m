@@ -4,13 +4,13 @@
 #import "_TLPullRequest.h"
 
 const struct TLPullRequestAttributes TLPullRequestAttributes = {
-    .label = @"label",
-    .number = @"number",
+	.label = @"label",
+	.number = @"number",
 };
 
 const struct TLPullRequestRelationships TLPullRequestRelationships = {
-    .comments = @"comments",
-    .commits = @"commits",
+	.comments = @"comments",
+	.commits = @"commits",
 };
 
 const struct TLPullRequestFetchedProperties TLPullRequestFetchedProperties = {
@@ -22,32 +22,32 @@ const struct TLPullRequestFetchedProperties TLPullRequestFetchedProperties = {
 @implementation _TLPullRequest
 
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-    NSParameterAssert(moc_);
-    return [NSEntityDescription insertNewObjectForEntityForName:@"PullRequest" inManagedObjectContext:moc_];
+	NSParameterAssert(moc_);
+	return [NSEntityDescription insertNewObjectForEntityForName:@"PullRequest" inManagedObjectContext:moc_];
 }
 
 + (NSString*)entityName {
-    return @"PullRequest";
+	return @"PullRequest";
 }
 
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-    NSParameterAssert(moc_);
-    return [NSEntityDescription entityForName:@"PullRequest" inManagedObjectContext:moc_];
+	NSParameterAssert(moc_);
+	return [NSEntityDescription entityForName:@"PullRequest" inManagedObjectContext:moc_];
 }
 
 - (TLPullRequestID*)objectID {
-    return (TLPullRequestID*)[super objectID];
+	return (TLPullRequestID*)[super objectID];
 }
 
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
-    NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
+	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
+	
+	if ([key isEqualToString:@"numberValue"]) {
+		NSSet *affectingKey = [NSSet setWithObject:@"number"];
+		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+	}
 
-    if ([key isEqualToString:@"numberValue"]) {
-        NSSet *affectingKey = [NSSet setWithObject:@"number"];
-        keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
-    }
-
-    return keyPaths;
+	return keyPaths;
 }
 
 
@@ -65,21 +65,21 @@ const struct TLPullRequestFetchedProperties TLPullRequestFetchedProperties = {
 
 
 - (int16_t)numberValue {
-    NSNumber *result = [self number];
-    return [result shortValue];
+	NSNumber *result = [self number];
+	return [result shortValue];
 }
 
 - (void)setNumberValue:(int16_t)value_ {
-    [self setNumber:[NSNumber numberWithShort:value_]];
+	[self setNumber:[NSNumber numberWithShort:value_]];
 }
 
 - (int16_t)primitiveNumberValue {
-    NSNumber *result = [self primitiveNumber];
-    return [result shortValue];
+	NSNumber *result = [self primitiveNumber];
+	return [result shortValue];
 }
 
 - (void)setPrimitiveNumberValue:(int16_t)value_ {
-    [self setPrimitiveNumber:[NSNumber numberWithShort:value_]];
+	[self setPrimitiveNumber:[NSNumber numberWithShort:value_]];
 }
 
 
@@ -88,29 +88,29 @@ const struct TLPullRequestFetchedProperties TLPullRequestFetchedProperties = {
 
 @dynamic comments;
 
-
+	
 - (NSMutableSet*)commentsSet {
-    [self willAccessValueForKey:@"comments"];
-
-    NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"comments"];
-
-    [self didAccessValueForKey:@"comments"];
-    return result;
+	[self willAccessValueForKey:@"comments"];
+  
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"comments"];
+  
+	[self didAccessValueForKey:@"comments"];
+	return result;
 }
-
+	
 
 @dynamic commits;
 
-
+	
 - (NSMutableSet*)commitsSet {
-    [self willAccessValueForKey:@"commits"];
-
-    NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"commits"];
-
-    [self didAccessValueForKey:@"commits"];
-    return result;
+	[self willAccessValueForKey:@"commits"];
+  
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"commits"];
+  
+	[self didAccessValueForKey:@"commits"];
+	return result;
 }
-
+	
 
 
 
