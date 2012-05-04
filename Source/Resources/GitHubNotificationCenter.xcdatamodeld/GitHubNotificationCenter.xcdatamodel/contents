@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50b" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Author" representedClassName="TLAuthor" syncable="YES">
+    <entity name="Author" representedClassName="TLAuthor" parentEntity="GithubObject" syncable="YES">
         <attribute name="avatarURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="email" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="githubObjects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GithubObject" inverseName="author" inverseEntity="GithubObject" syncable="YES"/>
     </entity>
@@ -25,14 +24,15 @@
     <entity name="PullRequest" representedClassName="TLPullRequest" parentEntity="GithubObject" syncable="YES">
         <attribute name="label" attributeType="String" syncable="YES"/>
         <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="pullRequestDescription" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="comments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Comment" inverseName="pullRequest" inverseEntity="Comment" syncable="YES"/>
         <relationship name="commits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Commit" inverseName="pullRequest" inverseEntity="Commit" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Author" positionX="160" positionY="192" width="128" height="105"/>
+        <element name="Author" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Comment" positionX="160" positionY="192" width="128" height="90"/>
         <element name="Commit" positionX="160" positionY="192" width="128" height="90"/>
         <element name="GithubObject" positionX="160" positionY="192" width="128" height="90"/>
-        <element name="PullRequest" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="PullRequest" positionX="160" positionY="192" width="128" height="120"/>
     </elements>
 </model>

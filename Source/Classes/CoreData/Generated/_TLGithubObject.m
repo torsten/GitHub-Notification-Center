@@ -4,13 +4,13 @@
 #import "_TLGithubObject.h"
 
 const struct TLGithubObjectAttributes TLGithubObjectAttributes = {
-    .date = @"date",
-    .githubID = @"githubID",
-    .url = @"url",
+	.date = @"date",
+	.githubID = @"githubID",
+	.url = @"url",
 };
 
 const struct TLGithubObjectRelationships TLGithubObjectRelationships = {
-    .author = @"author",
+	.author = @"author",
 };
 
 const struct TLGithubObjectFetchedProperties TLGithubObjectFetchedProperties = {
@@ -22,28 +22,28 @@ const struct TLGithubObjectFetchedProperties TLGithubObjectFetchedProperties = {
 @implementation _TLGithubObject
 
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-    NSParameterAssert(moc_);
-    return [NSEntityDescription insertNewObjectForEntityForName:@"GithubObject" inManagedObjectContext:moc_];
+	NSParameterAssert(moc_);
+	return [NSEntityDescription insertNewObjectForEntityForName:@"GithubObject" inManagedObjectContext:moc_];
 }
 
 + (NSString*)entityName {
-    return @"GithubObject";
+	return @"GithubObject";
 }
 
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-    NSParameterAssert(moc_);
-    return [NSEntityDescription entityForName:@"GithubObject" inManagedObjectContext:moc_];
+	NSParameterAssert(moc_);
+	return [NSEntityDescription entityForName:@"GithubObject" inManagedObjectContext:moc_];
 }
 
 - (TLGithubObjectID*)objectID {
-    return (TLGithubObjectID*)[super objectID];
+	return (TLGithubObjectID*)[super objectID];
 }
 
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
-    NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
+	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
+	
 
-
-    return keyPaths;
+	return keyPaths;
 }
 
 
@@ -72,7 +72,7 @@ const struct TLGithubObjectFetchedProperties TLGithubObjectFetchedProperties = {
 
 @dynamic author;
 
-
+	
 
 
 

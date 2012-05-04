@@ -4,13 +4,12 @@
 #import "_TLAuthor.h"
 
 const struct TLAuthorAttributes TLAuthorAttributes = {
-    .avatarURL = @"avatarURL",
-    .email = @"email",
-    .name = @"name",
+	.avatarURL = @"avatarURL",
+	.name = @"name",
 };
 
 const struct TLAuthorRelationships TLAuthorRelationships = {
-    .githubObjects = @"githubObjects",
+	.githubObjects = @"githubObjects",
 };
 
 const struct TLAuthorFetchedProperties TLAuthorFetchedProperties = {
@@ -22,41 +21,34 @@ const struct TLAuthorFetchedProperties TLAuthorFetchedProperties = {
 @implementation _TLAuthor
 
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-    NSParameterAssert(moc_);
-    return [NSEntityDescription insertNewObjectForEntityForName:@"Author" inManagedObjectContext:moc_];
+	NSParameterAssert(moc_);
+	return [NSEntityDescription insertNewObjectForEntityForName:@"Author" inManagedObjectContext:moc_];
 }
 
 + (NSString*)entityName {
-    return @"Author";
+	return @"Author";
 }
 
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-    NSParameterAssert(moc_);
-    return [NSEntityDescription entityForName:@"Author" inManagedObjectContext:moc_];
+	NSParameterAssert(moc_);
+	return [NSEntityDescription entityForName:@"Author" inManagedObjectContext:moc_];
 }
 
 - (TLAuthorID*)objectID {
-    return (TLAuthorID*)[super objectID];
+	return (TLAuthorID*)[super objectID];
 }
 
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
-    NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
+	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
+	
 
-
-    return keyPaths;
+	return keyPaths;
 }
 
 
 
 
 @dynamic avatarURL;
-
-
-
-
-
-
-@dynamic email;
 
 
 
@@ -72,16 +64,16 @@ const struct TLAuthorFetchedProperties TLAuthorFetchedProperties = {
 
 @dynamic githubObjects;
 
-
+	
 - (NSMutableSet*)githubObjectsSet {
-    [self willAccessValueForKey:@"githubObjects"];
-
-    NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"githubObjects"];
-
-    [self didAccessValueForKey:@"githubObjects"];
-    return result;
+	[self willAccessValueForKey:@"githubObjects"];
+  
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"githubObjects"];
+  
+	[self didAccessValueForKey:@"githubObjects"];
+	return result;
 }
-
+	
 
 
 
