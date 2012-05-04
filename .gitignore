@@ -1,4 +1,4 @@
-# Xcode
+# Xcode Noise
 build/*
 *.pbxuser
 !default.pbxuser
@@ -13,3 +13,23 @@ build/*
 xcuserdata
 profile
 *.moved-aside
+
+# Old School
+.svn
+
+# Mac OS X Noise
+.DS_Store
+
+# Windows Noise
+Thumbs.db
+
+# Temporary NIB Files & Swap Files
+*~.nib
+*.swp
+*.tmp
+
+# Textmate Build Errors
+*.tm_build_errors
+
+*.supported
+*.xcbkptlist
