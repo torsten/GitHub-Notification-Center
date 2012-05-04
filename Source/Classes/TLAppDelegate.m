@@ -7,6 +7,15 @@
 //
 
 #import "TLAppDelegate.h"
+#import "TLGitHubAPI.h"
+
+
+@interface TLAppDelegate()
+
+@property (nonatomic, strong) TLGitHubAPI *api;
+
+@end
+
 
 @implementation TLAppDelegate
 
@@ -14,10 +23,15 @@
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize managedObjectContext = __managedObjectContext;
+@synthesize api = _api;
+
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     // Insert code here to initialize your application
+    
+    self.api = [[TLGitHubAPI alloc] init];
+    [self.api updateIntoMOC:self.managedObjectContext];
 }
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "com.torsten-and-lars.GitHubNotificationCenter" in the user's Application Support directory.

@@ -15,6 +15,7 @@
 		2FDB9F8C1553F87500CB7487 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDB9F831553F87500CB7487 /* MainMenu.xib */; };
 		2FDB9F8D1553F87500CB7487 /* GitHubNotificationCenter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB9F851553F87500CB7487 /* GitHubNotificationCenter.xcdatamodeld */; };
 		E5867AF7155400FB00A7E61D /* UAGithubEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5867AF5155400E800A7E61D /* UAGithubEngine.framework */; };
+		E5867AFA15540F1100A7E61D /* TLGitHubAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = E5867AF915540F1100A7E61D /* TLGitHubAPI.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		2FDB9F841553F87500CB7487 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		2FDB9F861553F87500CB7487 /* GitHubNotificationCenter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitHubNotificationCenter.xcdatamodel; sourceTree = "<group>"; };
 		E5867AED155400E800A7E61D /* UAGithubEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UAGithubEngine.xcodeproj; path = Libraries/UAGithubEngine/UAGithubEngine.xcodeproj; sourceTree = "<group>"; };
+		E5867AF815540F1100A7E61D /* TLGitHubAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLGitHubAPI.h; sourceTree = "<group>"; };
+		E5867AF915540F1100A7E61D /* TLGitHubAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLGitHubAPI.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +104,8 @@
 		2FDB9F781553F87500CB7487 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E5867AF815540F1100A7E61D /* TLGitHubAPI.h */,
+				E5867AF915540F1100A7E61D /* TLGitHubAPI.m */,
 				2FDB9F791553F87500CB7487 /* main.m */,
 				2FDB9F7A1553F87500CB7487 /* TLAppDelegate.h */,
 				2FDB9F7B1553F87500CB7487 /* TLAppDelegate.m */,
@@ -211,6 +216,7 @@
 				2FDB9F871553F87500CB7487 /* main.m in Sources */,
 				2FDB9F881553F87500CB7487 /* TLAppDelegate.m in Sources */,
 				2FDB9F8D1553F87500CB7487 /* GitHubNotificationCenter.xcdatamodeld in Sources */,
+				E5867AFA15540F1100A7E61D /* TLGitHubAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
