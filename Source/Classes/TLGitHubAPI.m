@@ -29,7 +29,7 @@
 
 - (id)init
 {
-    if((self = [super init]))
+    if ((self = [super init]))
     {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
@@ -47,7 +47,25 @@
 
 - (void)updateIntoMOC:(NSManagedObjectContext *)moc
 {
-    NSLog(@"Will update recursively for repos: %@", self.reposToWatch);
+    for (NSString *repo in self.reposToWatch)
+    {
+        [self.engine pullRequestsForRepository:repo
+        success:^(id thing)
+        {
+            NSLog(@"requests: %@", [thing class]);
+            NSArray *pullRequests = (NSArray *)thing;
+
+            for (NSDictionary *dict in pullRequests)
+            {
+                NSLog(@" - dict: %@", dict);
+            }
+            
+        }
+        failure:^(NSError * err)
+        {
+            NSLog(@"Repo fetch fail: %@", err);
+        }];
+    }
 }
 
 
