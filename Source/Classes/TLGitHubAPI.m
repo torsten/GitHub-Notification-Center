@@ -48,6 +48,11 @@
     return self;
 }
 
+- (void)generateDummies
+{
+    //TLPullRequest *pullRequest = [TLPullRequest insertInManagedObjectContext:moc];
+}
+
 - (void)updateIntoMOC:(NSManagedObjectContext *)moc
 {
     for (NSString *repo in self.reposToWatch)
@@ -73,15 +78,18 @@
                 // pullRequest.owner = [WKWorkspace personalWorkspace];
                 // pullRequest.workspace = self.workspace;
                 // pullRequest.orderIndexValue = self.note.newOrderIndex;
+               
+//                TLPullRequest *pullRequest = [TLPullRequest ];
+
                 
                 
                 NSString *url = [dict objectForKey:@"html_url"];
                 NSString *date = [dict objectForKey:@"created_at"]; // 2012-05-03T17:22:24Z
                 NSString *label = [dict objectForKey:@"title"];
-                NSString *label
+                NSString *number = [dict objectForKey:@"number"];
                 
                 NSLog(@" - label: %@", label);
-                NSLog(@" - pull#: %@", url);
+                NSLog(@" - pull#: %@", number);
                 NSLog(@" - date: %@", date);
                 NSLog(@" - url: %@", url);
                 
@@ -96,7 +104,7 @@
                 NSDictionary *userDict = [dict objectForKey:@"user"];
                 
                 
-                NSLog(@" - dict: %@", dict);
+//                NSLog(@" - dict: %@", dict);
             }
         }
         failure:^(NSError * err)

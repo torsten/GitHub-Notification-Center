@@ -12,6 +12,8 @@
 
 - (id)init;
 
+- (void)generateDummies;
+
 /** Recursively fetches all pull requests stores in CoreData */
 - (void)updateIntoMOC:(NSManagedObjectContext *)moc;
 
