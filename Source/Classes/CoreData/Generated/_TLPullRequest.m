@@ -5,6 +5,7 @@
 
 const struct TLPullRequestAttributes TLPullRequestAttributes = {
     .label = @"label",
+    .number = @"number",
 };
 
 const struct TLPullRequestRelationships TLPullRequestRelationships = {
@@ -41,6 +42,10 @@ const struct TLPullRequestFetchedProperties TLPullRequestFetchedProperties = {
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
     NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
+    if ([key isEqualToString:@"numberValue"]) {
+        NSSet *affectingKey = [NSSet setWithObject:@"number"];
+        keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
+    }
 
     return keyPaths;
 }
@@ -50,6 +55,32 @@ const struct TLPullRequestFetchedProperties TLPullRequestFetchedProperties = {
 
 @dynamic label;
 
+
+
+
+
+
+@dynamic number;
+
+
+
+- (int16_t)numberValue {
+    NSNumber *result = [self number];
+    return [result shortValue];
+}
+
+- (void)setNumberValue:(int16_t)value_ {
+    [self setNumber:[NSNumber numberWithShort:value_]];
+}
+
+- (int16_t)primitiveNumberValue {
+    NSNumber *result = [self primitiveNumber];
+    return [result shortValue];
+}
+
+- (void)setPrimitiveNumberValue:(int16_t)value_ {
+    [self setPrimitiveNumber:[NSNumber numberWithShort:value_]];
+}
 
 
 
@@ -70,6 +101,15 @@ const struct TLPullRequestFetchedProperties TLPullRequestFetchedProperties = {
 
 @dynamic commits;
 
+
+- (NSMutableSet*)commitsSet {
+    [self willAccessValueForKey:@"commits"];
+
+    NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"commits"];
+
+    [self didAccessValueForKey:@"commits"];
+    return result;
+}
 
 
 

@@ -5,6 +5,7 @@
 
 const struct TLGithubObjectAttributes TLGithubObjectAttributes = {
     .date = @"date",
+    .githubID = @"githubID",
     .url = @"url",
 };
 
@@ -49,6 +50,13 @@ const struct TLGithubObjectFetchedProperties TLGithubObjectFetchedProperties = {
 
 
 @dynamic date;
+
+
+
+
+
+
+@dynamic githubID;
 
 
 

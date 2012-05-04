@@ -6,6 +6,7 @@
 
 extern const struct TLPullRequestAttributes {
 	__unsafe_unretained NSString *label;
+	__unsafe_unretained NSString *number;
 } TLPullRequestAttributes;
 
 extern const struct TLPullRequestRelationships {
@@ -18,6 +19,7 @@ extern const struct TLPullRequestFetchedProperties {
 
 @class TLComment;
 @class TLCommit;
+
 
 
 
@@ -41,6 +43,18 @@ extern const struct TLPullRequestFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber* number;
+
+
+@property int16_t numberValue;
+- (int16_t)numberValue;
+- (void)setNumberValue:(int16_t)value_;
+
+//- (BOOL)validateNumber:(id*)value_ error:(NSError**)error_;
+
+
+
+
 
 @property (nonatomic, strong) NSSet* comments;
 
@@ -49,9 +63,9 @@ extern const struct TLPullRequestFetchedProperties {
 
 
 
-@property (nonatomic, strong) TLCommit* commits;
+@property (nonatomic, strong) NSSet* commits;
 
-//- (BOOL)validateCommits:(id*)value_ error:(NSError**)error_;
+- (NSMutableSet*)commitsSet;
 
 
 
@@ -66,6 +80,11 @@ extern const struct TLPullRequestFetchedProperties {
 - (void)addCommentsObject:(TLComment*)value_;
 - (void)removeCommentsObject:(TLComment*)value_;
 
+- (void)addCommits:(NSSet*)value_;
+- (void)removeCommits:(NSSet*)value_;
+- (void)addCommitsObject:(TLCommit*)value_;
+- (void)removeCommitsObject:(TLCommit*)value_;
+
 @end
 
 @interface _TLPullRequest (CoreDataGeneratedPrimitiveAccessors)
@@ -77,14 +96,23 @@ extern const struct TLPullRequestFetchedProperties {
 
 
 
+- (NSNumber*)primitiveNumber;
+- (void)setPrimitiveNumber:(NSNumber*)value;
+
+- (int16_t)primitiveNumberValue;
+- (void)setPrimitiveNumberValue:(int16_t)value_;
+
+
+
+
 
 - (NSMutableSet*)primitiveComments;
 - (void)setPrimitiveComments:(NSMutableSet*)value;
 
 
 
-- (TLCommit*)primitiveCommits;
-- (void)setPrimitiveCommits:(TLCommit*)value;
+- (NSMutableSet*)primitiveCommits;
+- (void)setPrimitiveCommits:(NSMutableSet*)value;
 
 
 @end

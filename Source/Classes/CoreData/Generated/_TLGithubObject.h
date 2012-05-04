@@ -6,6 +6,7 @@
 
 extern const struct TLGithubObjectAttributes {
 	__unsafe_unretained NSString *date;
+	__unsafe_unretained NSString *githubID;
 	__unsafe_unretained NSString *url;
 } TLGithubObjectAttributes;
 
@@ -17,6 +18,7 @@ extern const struct TLGithubObjectFetchedProperties {
 } TLGithubObjectFetchedProperties;
 
 @class TLAuthor;
+
 
 
 
@@ -37,6 +39,14 @@ extern const struct TLGithubObjectFetchedProperties {
 
 
 //- (BOOL)validateDate:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSString* githubID;
+
+
+//- (BOOL)validateGithubID:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -69,6 +79,12 @@ extern const struct TLGithubObjectFetchedProperties {
 
 - (NSDate*)primitiveDate;
 - (void)setPrimitiveDate:(NSDate*)value;
+
+
+
+
+- (NSString*)primitiveGithubID;
+- (void)setPrimitiveGithubID:(NSString*)value;
 
 
 

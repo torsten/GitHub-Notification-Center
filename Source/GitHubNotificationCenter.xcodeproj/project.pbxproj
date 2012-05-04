@@ -19,6 +19,7 @@
 		2F48A4A115541289006F2750 /* _TLGithubObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A49515541289006F2750 /* _TLGithubObject.m */; };
 		2F48A4A215541289006F2750 /* _TLPullRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A49715541289006F2750 /* _TLPullRequest.m */; };
 		2F48A4A615541488006F2750 /* NSManagedObjectContext+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F48A4A515541488006F2750 /* NSManagedObjectContext+Extensions.m */; };
+		2FB6D15415541A5500D9D937 /* NSDateFormatter+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FB6D15315541A5500D9D937 /* NSDateFormatter+Extensions.m */; };
 		2FDB9F541553F7AE00CB7487 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FDB9F531553F7AE00CB7487 /* Cocoa.framework */; };
 		2FDB9F871553F87500CB7487 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB9F791553F87500CB7487 /* main.m */; };
 		2FDB9F881553F87500CB7487 /* TLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB9F7B1553F87500CB7487 /* TLAppDelegate.m */; };
@@ -90,6 +91,9 @@
 		2F48A49715541289006F2750 /* _TLPullRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _TLPullRequest.m; sourceTree = "<group>"; };
 		2F48A4A415541488006F2750 /* NSManagedObjectContext+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectContext+Extensions.h"; sourceTree = "<group>"; };
 		2F48A4A515541488006F2750 /* NSManagedObjectContext+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectContext+Extensions.m"; sourceTree = "<group>"; };
+		2FB6D15215541A5500D9D937 /* NSDateFormatter+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+Extensions.h"; sourceTree = "<group>"; };
+		2FB6D15315541A5500D9D937 /* NSDateFormatter+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+Extensions.m"; sourceTree = "<group>"; };
+		2FB6D16415541FF300D9D937 /* TLMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TLMacros.h; sourceTree = "<group>"; };
 		2FDB9F4F1553F7AE00CB7487 /* GitHubNotificationCenter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubNotificationCenter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FDB9F531553F7AE00CB7487 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		2FDB9F561553F7AE00CB7487 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -174,21 +178,30 @@
 		2F48A4A315541488006F2750 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2FB6D15215541A5500D9D937 /* NSDateFormatter+Extensions.h */,
+				2FB6D15315541A5500D9D937 /* NSDateFormatter+Extensions.m */,
 				2F48A4A415541488006F2750 /* NSManagedObjectContext+Extensions.h */,
 				2F48A4A515541488006F2750 /* NSManagedObjectContext+Extensions.m */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		2FB6D15515541A7C00D9D937 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				E5867AED155400E800A7E61D /* UAGithubEngine.xcodeproj */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
 		2FDB9F441553F7AE00CB7487 = {
 			isa = PBXGroup;
 			children = (
-				8F557F78155417A500923D02 /* WebKit.framework */,
 				2FDB9F781553F87500CB7487 /* Classes */,
+				2FB6D15515541A7C00D9D937 /* Libraries */,
+				2FDB9F7E1553F87500CB7487 /* Resources */,
 				2FDB9F7C1553F87500CB7487 /* GitHubNotificationCenter-Info.plist */,
 				2FDB9F7D1553F87500CB7487 /* GitHubNotificationCenter-Prefix.pch */,
-				2FDB9F7E1553F87500CB7487 /* Resources */,
-				E5867AED155400E800A7E61D /* UAGithubEngine.xcodeproj */,
 				2FDB9F521553F7AE00CB7487 /* Frameworks */,
 				2FDB9F501553F7AE00CB7487 /* Products */,
 			);
@@ -205,6 +218,7 @@
 		2FDB9F521553F7AE00CB7487 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8F557F78155417A500923D02 /* WebKit.framework */,
 				2FDB9F531553F7AE00CB7487 /* Cocoa.framework */,
 				2FDB9F551553F7AE00CB7487 /* Other Frameworks */,
 			);
@@ -232,6 +246,7 @@
 				E5867AF915540F1100A7E61D /* TLGitHubAPI.m */,
 				2FDB9F791553F87500CB7487 /* main.m */,
 				2FDB9F7A1553F87500CB7487 /* TLAppDelegate.h */,
+				2FB6D16415541FF300D9D937 /* TLMacros.h */,
 				2FDB9F7B1553F87500CB7487 /* TLAppDelegate.m */,
 			);
 			path = Classes;
@@ -356,6 +371,7 @@
 				2F48A4A215541289006F2750 /* _TLPullRequest.m in Sources */,
 				2F48A4A615541488006F2750 /* NSManagedObjectContext+Extensions.m in Sources */,
 				8F557F771554175300923D02 /* WebViewController.m in Sources */,
+				2FB6D15415541A5500D9D937 /* NSDateFormatter+Extensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
