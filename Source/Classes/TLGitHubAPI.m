@@ -171,7 +171,7 @@
 {
     [self.engine commitsInPullRequest:pullRequest.numberValue forRepository:repo.name success:^(NSArray *commits)
     {
-        // NSLog(@"commit comments success: (%@) %@", [commits class], commits);
+        // NSLog(@"commit success: (%@) %@", [commits class], commits);
 
         for (NSDictionary *dict in commits)
         {
@@ -179,11 +179,13 @@
             NSString *message = [[dict objectForKey:@"commit"] objectForKey:@"message"];
             NSString *dateString = [[[dict objectForKey:@"commit"] objectForKey:@"author"] objectForKey:@"date"];
             NSDate *date = [NSDateFormatter dateFromRFC3339String:dateString];
+            TLAuthor *author = [self authorWithDict:[dict objectForKey:@"author"] intoMOC:moc];
 
             TLCommit *commit = [TLCommit fetchOrCreateWithID:sha managedObjectContext:moc];
             commit.message = message;
-            commit.created_at = date;
+            commit.created_at = date; // commits do not have updated_at
             commit.url = [NSString stringWithFormat:@"https://github.com/%@/commit/%@", repo.name, sha];
+            commit.author = author;
 
             [pullRequest addCommitsObject:commit];
 
@@ -205,53 +207,23 @@
 {
     NSString *sha = commit.githubID;
 
-    [self.engine commitCommentsForCommit:sha inRepository:repo.name success:^(id thing)
+    [self.engine commitCommentsForCommit:sha inRepository:repo.name success:^(NSArray *commitComments)
     {
-        // NSLog(@"commit comment success: (%@) %@", [thing class], thing);
-        //  (__NSArrayM) (
-        //         {
-        //         body = "Test comment in commit ";
-        //         "commit_id" = ;
-        //         "created_at" = "2012-05-04T11:20:46Z";
-        //         "html_url" = ""https://github.com/6wunderkinder/.../commit/b90...#commitcomment-1291705"";
-        //         id = 1291705;
-        //         line = 67;
-        //         path = "Source/Classes/....h";
-        //         position = 5;
-        //         "updated_at" = "2012-05-04T11:20:46Z";
-        //         url = "https://api.github.com/repos/6wunderkinder/.../comments/1291705";
-        //         user =         {
-        //         };
-        //     },
-        //         {
-        //         body = "?";
-        //         "commit_id" = b902495df8e27f87311ffae187657bd47d5d7266;
-        //         "created_at" = "2012-05-04T11:55:47Z";
-        //         "html_url" = "https://github.com/6wunderkinder/.../commit/b90...#commitcomment-1291843";
-        //         id = 1291843;
-        //         line = 67;
-        //         path = "Source/Classes/WKAPIMacros.h";
-        //         position = 5;
-        //         "updated_at" = "2012-05-04T11:55:47Z";
-        //         url = "https://api.github.com/repos/6wunderkinder/.../comments/1291843";
-        //         user =         {
-        //         };
-        //     }
-        // )
-
-        NSArray *commitComments = (NSArray *)thing;
+        // NSLog(@"commit comments success: (%@) %@", [commitComments class], commitComments);
 
         for (NSDictionary *dict in commitComments)
         {
-            NSString *message = [dict objectForKey:@"body"];
             NSString *githubID = [[dict objectForKey:@"id"] stringValue];
-            NSDate *date = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"updated_at"]];
+            TLAuthor *author = [self authorWithDict:[dict objectForKey:@"user"] intoMOC:moc];
 
             TLComment *commitComment = [TLComment fetchOrCreateWithID:githubID managedObjectContext:moc];
-            commitComment.message = message;
+
+            commitComment.message = [dict objectForKey:@"body"];
             commitComment.url = [NSString stringWithFormat:@"https://github.com/%@/commit/%@#commitcomment-%@",
                                                            repo.name, sha, githubID];
-            commitComment.updated_at = date;
+            commitComment.created_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"created_at"]];
+            commitComment.updated_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"updated_at"]];
+            commitComment.author = author;
 
             [commit addCommentsObject:commitComment];
         }
