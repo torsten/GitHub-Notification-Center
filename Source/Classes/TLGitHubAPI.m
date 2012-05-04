@@ -114,6 +114,7 @@
             pullRequest.number = [dict objectForKey:@"number"];
             pullRequest.created_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"created_at"]];
             pullRequest.updated_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"updated_at"]];
+            pullRequest.repository = repo;
 
             [self updateCommentsForPullRequest:pullRequest inRepo:repo.name intoMOC:moc];
             [self updateCommitsForPullRequest:pullRequest inRepo:repo.name intoMOC:moc];
