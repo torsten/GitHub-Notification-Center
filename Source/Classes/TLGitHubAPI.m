@@ -12,6 +12,7 @@
 #import "TLCommit.h"
 #import "TLGitHubAPI.h"
 #import "TLPullRequest.h"
+#import "TLRepository.h"
 #import <UAGithubEngine/UAGithubEngine.h>
 
 
@@ -69,37 +70,61 @@
 
 - (void)updateIntoMOC:(NSManagedObjectContext *)moc
 {
-    for (NSString *repo in self.reposToWatch)
+    for (NSString *repoName in self.reposToWatch)
     {
-        [self.engine pullRequestsForRepository:repo success:^(NSArray *pullRequests)
+        [self.engine repository:repoName success:^(NSArray *repositories)
         {
-            // NSLog(@"pull reqest success: (%@) %@", [pullRequests class], pullRequests);
+            NSDictionary *dict = [repositories lastObject];
 
-            for (NSDictionary *dict in pullRequests)
-            {
-                NSString *githubID = [[dict objectForKey:@"id"] stringValue];
+            TLRepository *repo = [TLRepository fetchOrCreateWithID:[[dict objectForKey:@"id"] stringValue]
+                                              managedObjectContext:moc];
+            repo.name = repoName;
+            repo.created_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"created_at"]];
+            repo.updated_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"updated_at"]];
+            repo.url = [dict objectForKey:@"html_url"];
 
-                TLAuthor *author = [self authorWithDict:[dict objectForKey:@"user"] intoMOC:moc];
-
-                TLPullRequest *pullRequest = [TLPullRequest fetchOrCreateWithID:githubID managedObjectContext:moc];
-                pullRequest.label = [dict objectForKey:@"title"];
-                pullRequest.author = author;
-                pullRequest.url = [dict objectForKey:@"html_url"];
-                pullRequest.number = [dict objectForKey:@"number"];
-                pullRequest.created_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"created_at"]];
-                pullRequest.updated_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"updated_at"]];
-
-                [self updateCommentsForPullRequest:pullRequest inRepo:repo intoMOC:moc];
-                [self updateCommitsForPullRequest:pullRequest inRepo:repo intoMOC:moc];
-            }
-
+            [self updatePullRequestsForRepository:repo intoMOC:moc];
             [moc saveChanges];
         }
-        failure:^(NSError * err)
+        failure:^(NSError *err)
         {
             NSLog(@"Repo fetch fail: %@", err);
         }];
     }
+}
+
+
+- (void)updatePullRequestsForRepository:(TLRepository *)repo
+                                intoMOC:(NSManagedObjectContext *)moc
+{
+    [self.engine pullRequestsForRepository:repo.name success:^(NSArray *pullRequests)
+    {
+        // NSLog(@"pull reqest success: (%@) %@", [pullRequests class], pullRequests);
+
+        for (NSDictionary *dict in pullRequests)
+        {
+            NSString *githubID = [[dict objectForKey:@"id"] stringValue];
+
+            TLAuthor *author = [self authorWithDict:[dict objectForKey:@"user"] intoMOC:moc];
+
+            TLPullRequest *pullRequest = [TLPullRequest fetchOrCreateWithID:githubID managedObjectContext:moc];
+            pullRequest.label = [dict objectForKey:@"title"];
+            pullRequest.author = author;
+            pullRequest.url = [dict objectForKey:@"html_url"];
+            pullRequest.number = [dict objectForKey:@"number"];
+            pullRequest.created_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"created_at"]];
+            pullRequest.updated_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"updated_at"]];
+
+            [self updateCommentsForPullRequest:pullRequest inRepo:repo.name intoMOC:moc];
+            [self updateCommitsForPullRequest:pullRequest inRepo:repo.name intoMOC:moc];
+        }
+
+        [moc saveChanges];
+    }
+    failure:^(NSError * err)
+    {
+        NSLog(@"Pull request fail: %@", err);
+    }];
 }
 
 
