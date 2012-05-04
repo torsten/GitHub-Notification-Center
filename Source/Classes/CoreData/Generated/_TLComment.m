@@ -4,12 +4,12 @@
 #import "_TLComment.h"
 
 const struct TLCommentAttributes TLCommentAttributes = {
-    .message = @"message",
+	.message = @"message",
 };
 
 const struct TLCommentRelationships TLCommentRelationships = {
-    .commit = @"commit",
-    .pullRequest = @"pullRequest",
+	.commit = @"commit",
+	.pullRequest = @"pullRequest",
 };
 
 const struct TLCommentFetchedProperties TLCommentFetchedProperties = {
@@ -21,28 +21,28 @@ const struct TLCommentFetchedProperties TLCommentFetchedProperties = {
 @implementation _TLComment
 
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-    NSParameterAssert(moc_);
-    return [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:moc_];
+	NSParameterAssert(moc_);
+	return [NSEntityDescription insertNewObjectForEntityForName:@"Comment" inManagedObjectContext:moc_];
 }
 
 + (NSString*)entityName {
-    return @"Comment";
+	return @"Comment";
 }
 
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-    NSParameterAssert(moc_);
-    return [NSEntityDescription entityForName:@"Comment" inManagedObjectContext:moc_];
+	NSParameterAssert(moc_);
+	return [NSEntityDescription entityForName:@"Comment" inManagedObjectContext:moc_];
 }
 
 - (TLCommentID*)objectID {
-    return (TLCommentID*)[super objectID];
+	return (TLCommentID*)[super objectID];
 }
 
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
-    NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
+	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
+	
 
-
-    return keyPaths;
+	return keyPaths;
 }
 
 
@@ -57,11 +57,11 @@ const struct TLCommentFetchedProperties TLCommentFetchedProperties = {
 
 @dynamic commit;
 
-
+	
 
 @dynamic pullRequest;
 
-
+	
 
 
 

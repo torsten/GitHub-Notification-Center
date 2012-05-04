@@ -4,12 +4,12 @@
 #import "_TLCommit.h"
 
 const struct TLCommitAttributes TLCommitAttributes = {
-    .message = @"message",
+	.message = @"message",
 };
 
 const struct TLCommitRelationships TLCommitRelationships = {
-    .comments = @"comments",
-    .pullRequest = @"pullRequest",
+	.comments = @"comments",
+	.pullRequest = @"pullRequest",
 };
 
 const struct TLCommitFetchedProperties TLCommitFetchedProperties = {
@@ -21,28 +21,28 @@ const struct TLCommitFetchedProperties TLCommitFetchedProperties = {
 @implementation _TLCommit
 
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-    NSParameterAssert(moc_);
-    return [NSEntityDescription insertNewObjectForEntityForName:@"Commit" inManagedObjectContext:moc_];
+	NSParameterAssert(moc_);
+	return [NSEntityDescription insertNewObjectForEntityForName:@"Commit" inManagedObjectContext:moc_];
 }
 
 + (NSString*)entityName {
-    return @"Commit";
+	return @"Commit";
 }
 
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-    NSParameterAssert(moc_);
-    return [NSEntityDescription entityForName:@"Commit" inManagedObjectContext:moc_];
+	NSParameterAssert(moc_);
+	return [NSEntityDescription entityForName:@"Commit" inManagedObjectContext:moc_];
 }
 
 - (TLCommitID*)objectID {
-    return (TLCommitID*)[super objectID];
+	return (TLCommitID*)[super objectID];
 }
 
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
-    NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
+	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
+	
 
-
-    return keyPaths;
+	return keyPaths;
 }
 
 
@@ -57,20 +57,20 @@ const struct TLCommitFetchedProperties TLCommitFetchedProperties = {
 
 @dynamic comments;
 
-
+	
 - (NSMutableSet*)commentsSet {
-    [self willAccessValueForKey:@"comments"];
-
-    NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"comments"];
-
-    [self didAccessValueForKey:@"comments"];
-    return result;
+	[self willAccessValueForKey:@"comments"];
+  
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"comments"];
+  
+	[self didAccessValueForKey:@"comments"];
+	return result;
 }
-
+	
 
 @dynamic pullRequest;
 
-
+	
 
 
 
