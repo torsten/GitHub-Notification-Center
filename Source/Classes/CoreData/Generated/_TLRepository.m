@@ -9,6 +9,7 @@ const struct TLRepositoryAttributes TLRepositoryAttributes = {
 };
 
 const struct TLRepositoryRelationships TLRepositoryRelationships = {
+	.pullRequests = @"pullRequests",
 };
 
 const struct TLRepositoryFetchedProperties TLRepositoryFetchedProperties = {
@@ -60,6 +61,19 @@ const struct TLRepositoryFetchedProperties TLRepositoryFetchedProperties = {
 
 
 
+
+@dynamic pullRequests;
+
+	
+- (NSMutableSet*)pullRequestsSet {
+	[self willAccessValueForKey:@"pullRequests"];
+  
+	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"pullRequests"];
+  
+	[self didAccessValueForKey:@"pullRequests"];
+	return result;
+}
+	
 
 
 

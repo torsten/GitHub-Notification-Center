@@ -12,6 +12,7 @@ const struct TLPullRequestAttributes TLPullRequestAttributes = {
 const struct TLPullRequestRelationships TLPullRequestRelationships = {
 	.comments = @"comments",
 	.commits = @"commits",
+	.repository = @"repository",
 };
 
 const struct TLPullRequestFetchedProperties TLPullRequestFetchedProperties = {
@@ -118,6 +119,10 @@ const struct TLPullRequestFetchedProperties TLPullRequestFetchedProperties = {
 	[self didAccessValueForKey:@"commits"];
 	return result;
 }
+	
+
+@dynamic repository;
+
 	
 
 

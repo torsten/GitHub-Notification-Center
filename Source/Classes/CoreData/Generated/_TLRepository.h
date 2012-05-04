@@ -10,11 +10,13 @@ extern const struct TLRepositoryAttributes {
 } TLRepositoryAttributes;
 
 extern const struct TLRepositoryRelationships {
+	__unsafe_unretained NSString *pullRequests;
 } TLRepositoryRelationships;
 
 extern const struct TLRepositoryFetchedProperties {
 } TLRepositoryFetchedProperties;
 
+@class TLPullRequest;
 
 
 
@@ -48,10 +50,22 @@ extern const struct TLRepositoryFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSSet* pullRequests;
+
+- (NSMutableSet*)pullRequestsSet;
+
+
+
+
 
 @end
 
 @interface _TLRepository (CoreDataGeneratedAccessors)
+
+- (void)addPullRequests:(NSSet*)value_;
+- (void)removePullRequests:(NSSet*)value_;
+- (void)addPullRequestsObject:(TLPullRequest*)value_;
+- (void)removePullRequestsObject:(TLPullRequest*)value_;
 
 @end
 
@@ -68,6 +82,11 @@ extern const struct TLRepositoryFetchedProperties {
 - (void)setPrimitiveRepositoryDescription:(NSString*)value;
 
 
+
+
+
+- (NSMutableSet*)primitivePullRequests;
+- (void)setPrimitivePullRequests:(NSMutableSet*)value;
 
 
 @end
