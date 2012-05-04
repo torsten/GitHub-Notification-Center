@@ -42,6 +42,9 @@
 
     _pullRequestData = [[NSMutableArray alloc] initWithCapacity:0];
     [self.pullRequestTable reloadData];
+
+    switchSidebar = NO;
+    [self.splitView adjustSubviews];
 }
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "com.torsten-and-lars.GitHubNotificationCenter" in the user's Application Support directory.

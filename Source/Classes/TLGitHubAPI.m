@@ -78,7 +78,6 @@
                 NSString *url = [dict objectForKey:@"html_url"];
                 NSString *date = [dict objectForKey:@"created_at"]; // 2012-05-03T17:22:24Z
                 NSString *label = [dict objectForKey:@"title"];
-                NSString *label
                 
                 NSLog(@" - label: %@", label);
                 NSLog(@" - pull#: %@", url);
