@@ -57,14 +57,6 @@
 
 - (TLAuthor *)authorWithDict:(NSDictionary *)userDict intoMOC:(NSManagedObjectContext *)moc
 {
-    // user =     {
-    //     "avatar_url" = "https://secure.gravatar.com/avatar/7bc...";
-    //     "gravatar_id" = 7bce86ef594d03d98383f9a9d842d32d;
-    //     id = 13548;
-    //     login = torsten;
-    //     url = "https://api.github.com/users/torsten";
-    // };
-
     TLAuthor *author = [TLAuthor fetchOrCreateWithID:[[userDict objectForKey:@"id"] stringValue]
                                 managedObjectContext:moc];
     author.name = [userDict objectForKey:@"login"];
@@ -79,36 +71,23 @@
 {
     for (NSString *repo in self.reposToWatch)
     {
-        [self.engine pullRequestsForRepository:repo success:^(id thing)
+        [self.engine pullRequestsForRepository:repo success:^(NSArray *pullRequests)
         {
-            // NSLog(@"pull req success: (%@) %@", [thing class], thing);
-
-            NSArray *pullRequests = (NSArray *)thing;
+            // NSLog(@"pull reqest success: (%@) %@", [pullRequests class], pullRequests);
 
             for (NSDictionary *dict in pullRequests)
             {
-                NSString *url = [dict objectForKey:@"html_url"];
-                NSDate *date = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"created_at"]];
-                NSString *label = [dict objectForKey:@"title"];
-                int number = [[dict objectForKey:@"number"] intValue];
-                NSString *gitHubId = [[dict objectForKey:@"id"] stringValue];
+                NSString *githubID = [[dict objectForKey:@"id"] stringValue];
 
-                NSLog(@" - label: %@", label);
-                NSLog(@" - pull#: %d", number);
-                NSLog(@" - date: %@", date);
-                NSLog(@" - url: %@", url);
-                NSLog(@" - id: %@", gitHubId);
+                TLAuthor *author = [self authorWithDict:[dict objectForKey:@"user"] intoMOC:moc];
 
-                NSDictionary *userDict = [dict objectForKey:@"user"];
-
-                TLAuthor *author = [self authorWithDict:userDict intoMOC:moc];
-
-                TLPullRequest *pullRequest = [TLPullRequest fetchOrCreateWithID:gitHubId managedObjectContext:moc];
-                pullRequest.label = label;
-                pullRequest.numberValue = number;
+                TLPullRequest *pullRequest = [TLPullRequest fetchOrCreateWithID:githubID managedObjectContext:moc];
+                pullRequest.label = [dict objectForKey:@"title"];
                 pullRequest.author = author;
-                pullRequest.url = url;
-                pullRequest.created_at = date;
+                pullRequest.url = [dict objectForKey:@"html_url"];
+                pullRequest.number = [dict objectForKey:@"number"];
+                pullRequest.created_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"created_at"]];
+                pullRequest.updated_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"updated_at"]];
 
                 [self updateCommentsForPullRequest:pullRequest inRepo:repo intoMOC:moc];
                 [self updateCommitsForPullRequest:pullRequest inRepo:repo intoMOC:moc];
@@ -128,23 +107,11 @@
                               inRepo:(NSString *)repo
                              intoMOC:(NSManagedObjectContext *)moc
 {
-    int pullRequestId = pullRequest.numberValue;
+    int pullRequestNumber = pullRequest.numberValue;
 
-    [self.engine commentsForIssue:pullRequestId forRepository:repo
-    success:^(id thing)
+    [self.engine commentsForIssue:pullRequestNumber forRepository:repo success:^(NSArray *comments)
     {
-        // NSLog(@"pull comment success: (%@) %@", [thing class], thing);
-        // (__NSArrayM) (
-        //         {
-        //         body = "Test comment on pull request";
-        //         "created_at" = "2012-05-04T11:20:29Z";
-        //         id = 5508406;
-        //         "updated_at" = "2012-05-04T11:21:55Z";
-        //         url = "https://api.github.com/repos/6wunderkinder/.../issues/comments/5508406";
-        //     }
-        // )
-
-        NSArray *comments = (NSArray *)thing;
+        // NSLog(@"pull request comments success: (%@) %@", [comments class], comments);
 
         for (NSDictionary *dict in comments)
         {
@@ -152,7 +119,7 @@
             NSString *message = [dict objectForKey:@"body"];
             int commentId = [[dict objectForKey:@"id"] intValue];
             NSString *url = [NSString stringWithFormat:@"https://github.com/%@/pull/%d#issuecomment-%d",
-                                                       repo, pullRequestId, commentId];
+                                                       repo, pullRequestNumber, commentId];
 
             NSLog(@"   - id: %d", commentId);
             NSLog(@"   - message: %@", message);
@@ -185,9 +152,9 @@
                              inRepo:(NSString *)repo
                             intoMOC:(NSManagedObjectContext *)moc
 {
-    int pullRequestId = pullRequest.numberValue;
+    int pullRequestNumber = pullRequest.numberValue;
 
-    [self.engine commitsInPullRequest:pullRequestId forRepository:repo
+    [self.engine commitsInPullRequest:pullRequestNumber forRepository:repo
     success:^(id thing)
     {
         // NSLog(@"commit success: (%@) %@", [thing class], thing);
