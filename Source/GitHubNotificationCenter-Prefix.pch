@@ -4,4 +4,6 @@
 
 #ifdef __OBJC__
     #import <Cocoa/Cocoa.h>
+    #import "NSManagedObjectContext+Extensions.h"
+    #import "TLMacros.h"
 #endif

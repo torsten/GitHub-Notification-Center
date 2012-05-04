@@ -1,5 +1,8 @@
 #import "_TLAuthor.h"
 
 @interface TLAuthor : _TLAuthor {}
-// Custom logic goes here.
+
++ (id)fetchOrCreateWithEmail:(NSString *)email
+        managedObjectContext:(NSManagedObjectContext *)moc;
+
 @end

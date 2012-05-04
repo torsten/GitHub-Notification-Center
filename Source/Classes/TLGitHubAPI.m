@@ -48,6 +48,31 @@
     return self;
 }
 
+
+- (void)generateDummiesIntoMOC:(NSManagedObjectContext *)moc
+{
+    TLAuthor *author = [TLAuthor fetchOrCreateWithEmail:@"lars@lars.com" managedObjectContext:moc];
+
+
+    TLPullRequest *pullRequest = [TLPullRequest fetchOrCreateWithID:@"xxxPullRequest" managedObjectContext:moc];
+
+    TLComment *pullRequestComment = [TLComment fetchOrCreateWithID:@"xxxPullRequestComment" managedObjectContext:moc];
+    pullRequestComment.message = @"laber rababer pull request";
+    [pullRequest addCommentsObject:pullRequestComment];
+
+
+    TLCommit *commit = [TLCommit fetchOrCreateWithID:@"123commit" managedObjectContext:moc];
+
+    TLComment *commitComment = [TLComment  fetchOrCreateWithID:@"123commitComment" managedObjectContext:moc];
+    commitComment.message = @"commit comment";
+    [commit addCommentsObject:commitComment];
+
+    [pullRequest addCommitsObject:commit];
+
+    [moc saveChanges];
+}
+
+
 - (void)updateIntoMOC:(NSManagedObjectContext *)moc
 {
     for (NSString *repo in self.reposToWatch)
@@ -55,36 +80,39 @@
         [self.engine pullRequestsForRepository:repo
         success:^(id thing)
         {
-            NSLog(@"requests: %@", [thing class]);
             NSArray *pullRequests = (NSArray *)thing;
 
             for (NSDictionary *dict in pullRequests)
             {
                 // TLAuthor:
                 // avatarURL, email, name
-                
+
                 // TLPullRequest *pullRequest = [TLPullRequest insertInManagedObjectContext:moc];
-                
-                // date, url, (author), 
+
+                // date, url, (author),
                 // label, comments, commits
-                
+
                 // pullRequest.text = self.editingView.textView.text;
                 // pullRequest.tags = self.tagsForNewNote;
                 // pullRequest.owner = [WKWorkspace personalWorkspace];
                 // pullRequest.workspace = self.workspace;
                 // pullRequest.orderIndexValue = self.note.newOrderIndex;
-                
-                
+
+//                TLPullRequest *pullRequest = [TLPullRequest ];
+
+
+
                 NSString *url = [dict objectForKey:@"html_url"];
                 NSString *date = [dict objectForKey:@"created_at"]; // 2012-05-03T17:22:24Z
                 NSString *label = [dict objectForKey:@"title"];
-                
+                int number = [[dict objectForKey:@"number"] intValue];
+
                 NSLog(@" - label: %@", label);
-                NSLog(@" - pull#: %@", url);
+                NSLog(@" - pull#: %d", number);
                 NSLog(@" - date: %@", date);
                 NSLog(@" - url: %@", url);
-                
-                
+
+
                 // user =     {
                 //     "avatar_url" = "https://secure.gravatar.com/avatar/7bce86ef594d03d98383f9a9d842d32d?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png";
                 //     "gravatar_id" = 7bce86ef594d03d98383f9a9d842d32d;
@@ -93,9 +121,13 @@
                 //     url = "https://api.github.com/users/torsten";
                 // };
                 NSDictionary *userDict = [dict objectForKey:@"user"];
-                
-                
-                NSLog(@" - dict: %@", dict);
+
+                // [self updateCommentsForPullRequest:number inRepo:repo intoPullRequest:nil];
+
+                [self updateCommitsForPullRequest:number inRepo:repo intoPullRequest:nil];
+
+
+                // NSLog(@"pull req success: (%@) %@", [thing class], thing);
             }
         }
         failure:^(NSError * err)
@@ -106,51 +138,188 @@
 }
 
 
+- (void)updateCommentsForPullRequest:(int)pullRequestId
+                              inRepo:(NSString *)repo
+                     intoPullRequest:(TLPullRequest *)pullRequest
+{
+    [self.engine commentsForIssue:pullRequestId forRepository:repo
+    success:^(id thing)
+    {
+        // NSLog(@"pull comment success: (%@) %@", [thing class], thing);
+        // (__NSArrayM) (
+        //         {
+        //         body = "Test comment on pull request";
+        //         "created_at" = "2012-05-04T11:20:29Z";
+        //         id = 5508406;
+        //         "updated_at" = "2012-05-04T11:21:55Z";
+        //         url = "https://api.github.com/repos/6wunderkinder/.../issues/comments/5508406";
+        //     }
+        // )
 
-// [engine pullRequestsForRepository:@"6wunderkinder/wunderkit-clientapi"
-//                      success:^(id thing)
-//                      {
-//                          NSLog(@"success: %@", thing);
-//                      }
-//                      failure:^(NSError * err)
-//                      {
-//                          NSLog(@"fail: %@", err);
-//                      }];
+        NSArray *comments = (NSArray *)thing;
+
+        for (NSDictionary *dict in comments)
+        {
+            // date, url, (author),
+            // message
+
+            NSString *date = [dict objectForKey:@"created_at"]; // 2012-05-04T11:20:29Z
+            NSString *message = [dict objectForKey:@"body"];
+            int commentId = [[dict objectForKey:@"id"] intValue];
+            NSString *url = [NSString stringWithFormat:@"https://github.com/%@/pull/%d#issuecomment-%d",
+                                                       repo, pullRequestId, commentId];
+
+            NSLog(@"   - id: %d", commentId);
+            NSLog(@"   - message: %@", message);
+            NSLog(@"   - date: %@", date);
+            NSLog(@"   - url: %@", url);
 
 
-// [engine commitsInPullRequest:34 forRepository:@"6wunderkinder/wunderkit-clientapi"
-//                      success:^(id thing)
-//                      {
-//                          NSLog(@"success: %@", thing);
-//                      }
-//                      failure:^(NSError * err)
-//                      {
-//                          NSLog(@"fail: %@", err);
-//                      }];
-
-// [engine commitCommentsForCommit:@"b902495df8e27f87311ffae187657bd47d5d7266" inRepository:@"6wunderkinder/wunderkit-clientapi"
-//                      success:^(id thing)
-//                      {
-//                          NSLog(@"success: %@", thing);
-//                      }
-//                      failure:^(NSError * err)
-//                      {
-//                          NSLog(@"fail: %@", err);
-//                      }];
+            NSDictionary *userDict = [dict objectForKey:@"user"];
+            // user =         {
+            //     "avatar_url" = "https://secure.gravatar.com/avatar/7bce86ef594d03d98383f9a9d842d32d?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png";
+            //     "gravatar_id" = 7bce86ef594d03d98383f9a9d842d32d;
+            //     id = 13548;
+            //     login = torsten;
+            //     url = "https://api.github.com/users/torsten";
+            // };
+        }
+    }
+    failure:^(NSError * err)
+    {
+        NSLog(@"Pull comment fetch fail: %@", err);
+    }];
+}
 
 
+- (void)updateCommitsForPullRequest:(int)pullRequestId
+                             inRepo:(NSString *)repo
+                    intoPullRequest:(TLPullRequest *)pullRequest
+{
+    [self.engine commitsInPullRequest:pullRequestId forRepository:repo
+    success:^(id thing)
+    {
+        // NSLog(@"commit success: (%@) %@", [thing class], thing);
+        // (__NSArrayM) (
+        //         {
+        //         author =         {
+            // ...
+        //         };
+        //         commit =         {
+        //             author =             {
+        //                 date = "2012-05-03T07:23:23-07:00";
+        //                 email = "torsten.becker@gmail.com";
+        //                 name = "Torsten Becker";
+        //             };
+        //             committer =             {
+        //                 date = "2012-05-03T07:23:23-07:00";
+        //                 email = "torsten.becker@gmail.com";
+        //                 name = "Torsten Becker";
+        //             };
+        //             message = "Do not attempt to delete any database files if we have an in-memory store.";
+        //             tree =             {
+        //                 sha = d4...;
+        //                 url = "https://api.github.com/repos/6wunderkinder/.../git/trees/d43...";
+        //             };
+        //             url = "https://api.github.com/repos/6wunderkinder/.../git/commits/83e...";
+        //         };
+        //         committer =         {
+        //             "avatar_url" = "https://secure.gravatar.com/avatar/7b...?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png";
+        //             "gravatar_id" = 7bce86ef594d03d98383f9a9d842d32d;
+        //             id = 13548;
+        //             login = torsten;
+        //             url = "https://api.github.com/users/torsten";
+        //         };
+        //         parents =         (
+        //                         {
+        //                 sha = 61...;
+        //                 url = "https://api.github.com/repos/6wunderkinder/.../commits/61...";
+        //             }
+        //         );
+        //         sha = 83...;
+        //         url = "https://api.github.com/repos/6wunderkinder/.../commits/83...";
+        //     },
+        // ....
 
-// [engine :(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock];
 
-// [engine commentsForIssue:34 forRepository:@"6wunderkinder/wunderkit-clientapi"
-//                      success:^(id thing)
-//                      {
-//                          NSLog(@"success: (%@) %@", [thing class], thing);
-//                      }
-//                      failure:^(NSError * err)
-//                      {
-//                          NSLog(@"fail: %@", err);
-//                      }];
+
+        NSArray *commits = (NSArray *)thing;
+
+        for (NSDictionary *dict in commits)
+        {
+            // date, url, (author),
+            // message
+
+            NSString *sha = [dict objectForKey:@"sha"];
+            NSString *message = [[dict objectForKey:@"commit"] objectForKey:@"message"];
+
+            NSString *date = [[[dict objectForKey:@"commit"] objectForKey:@"author"] objectForKey:@"date"]; // 2012-05-03T07:23:23-07:00
+
+            NSLog(@"   - sha: %@", sha);
+            NSLog(@"   - message: %@", message);
+            NSLog(@"   - date: %@", date);
+
+            [self updateCommentsForCommit:sha inRepo:repo];
+        }
+    }
+    failure:^(NSError * err)
+    {
+        NSLog(@"Commit fetch fail: %@", err);
+    }];
+}
+
+
+- (void)updateCommentsForCommit:(NSString *)sha // TODO: Make this TLCommit
+                         inRepo:(NSString *)repo
+{
+    [self.engine commitCommentsForCommit:sha inRepository:repo
+    success:^(id thing)
+    {
+        // NSLog(@"commit comment success: (%@) %@", [thing class], thing);
+        //  (__NSArrayM) (
+        //         {
+        //         body = "Test comment in commit ";
+        //         "commit_id" = ;
+        //         "created_at" = "2012-05-04T11:20:46Z";
+        //         "html_url" = ""https://github.com/6wunderkinder/.../commit/b90...#commitcomment-1291705"";
+        //         id = 1291705;
+        //         line = 67;
+        //         path = "Source/Classes/....h";
+        //         position = 5;
+        //         "updated_at" = "2012-05-04T11:20:46Z";
+        //         url = "https://api.github.com/repos/6wunderkinder/.../comments/1291705";
+        //         user =         {
+        //         };
+        //     },
+        //         {
+        //         body = "?";
+        //         "commit_id" = b902495df8e27f87311ffae187657bd47d5d7266;
+        //         "created_at" = "2012-05-04T11:55:47Z";
+        //         "html_url" = "https://github.com/6wunderkinder/.../commit/b90...#commitcomment-1291843";
+        //         id = 1291843;
+        //         line = 67;
+        //         path = "Source/Classes/WKAPIMacros.h";
+        //         position = 5;
+        //         "updated_at" = "2012-05-04T11:55:47Z";
+        //         url = "https://api.github.com/repos/6wunderkinder/.../comments/1291843";
+        //         user =         {
+        //         };
+        //     }
+        // )
+
+
+        NSArray *commitComments = (NSArray *)thing;
+
+        for (NSDictionary *dict in commitComments)
+        {
+
+        }
+    }
+    failure:^(NSError * err)
+    {
+        NSLog(@"Commit comment fetch fail: %@", err);
+    }];
+}
 
 
 @end
