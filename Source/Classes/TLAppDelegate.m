@@ -46,7 +46,7 @@
     switchSidebar = NO;
     [self.splitView adjustSubviews];
 
-    [self.api generateDummiesIntoMOC:self.managedObjectContext];
+    // [self.api generateDummiesIntoMOC:self.managedObjectContext];
 }
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "com.torsten-and-lars.GitHubNotificationCenter" in the user's Application Support directory.

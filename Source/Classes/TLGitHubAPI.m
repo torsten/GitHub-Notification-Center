@@ -127,14 +127,18 @@
                 TLAuthor *author = [TLAuthor fetchOrCreateWithID:[[userDict objectForKey:@"id"] stringValue] managedObjectContext:moc];
                 author.name = [userDict objectForKey:@"login"];
                 author.avatarURL = [userDict objectForKey:@"avatar_url"];
+                author.url = [NSString stringWithFormat:@"http://github.com/%@", author.name];
 
                 TLPullRequest *pullRequest = [TLPullRequest fetchOrCreateWithID:gitHubId managedObjectContext:moc];
                 pullRequest.label = label;
                 pullRequest.numberValue = number;
                 pullRequest.author = author;
+                pullRequest.url = url;
 
-                [self updateCommentsForPullRequest:pullRequest inRepo:repo];
-                [self updateCommitsForPullRequest:pullRequest inRepo:repo];
+                [moc saveChanges];
+
+                [self updateCommentsForPullRequest:pullRequest inRepo:repo intoMOC:moc];
+                [self updateCommitsForPullRequest:pullRequest inRepo:repo intoMOC:moc];
 
 
                 // NSLog(@"pull req success: (%@) %@", [thing class], thing);
@@ -150,6 +154,7 @@
 
 - (void)updateCommentsForPullRequest:(TLPullRequest *)pullRequest
                               inRepo:(NSString *)repo
+                             intoMOC:(NSManagedObjectContext *)moc
 {
     int pullRequestId = pullRequest.numberValue;
 
@@ -194,6 +199,8 @@
             //     login = torsten;
             //     url = "https://api.github.com/users/torsten";
             // };
+
+            // [moc saveChanges];
         }
     }
     failure:^(NSError * err)
@@ -205,6 +212,7 @@
 
 - (void)updateCommitsForPullRequest:(TLPullRequest *)pullRequest
                              inRepo:(NSString *)repo
+                            intoMOC:(NSManagedObjectContext *)moc
 {
     int pullRequestId = pullRequest.numberValue;
 
@@ -271,7 +279,7 @@
             NSLog(@"   - message: %@", message);
             NSLog(@"   - date: %@", date);
 
-            [self updateCommentsForCommit:sha inRepo:repo];
+            [self updateCommentsForCommit:sha inRepo:repo intoMOC:moc];
         }
     }
     failure:^(NSError * err)
@@ -283,6 +291,7 @@
 
 - (void)updateCommentsForCommit:(NSString *)sha // TODO: Make this TLCommit
                          inRepo:(NSString *)repo
+                        intoMOC:(NSManagedObjectContext *)moc
 {
     [self.engine commitCommentsForCommit:sha inRepository:repo
     success:^(id thing)
