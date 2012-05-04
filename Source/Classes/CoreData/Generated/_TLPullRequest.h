@@ -13,6 +13,7 @@ extern const struct TLPullRequestAttributes {
 extern const struct TLPullRequestRelationships {
 	__unsafe_unretained NSString *comments;
 	__unsafe_unretained NSString *commits;
+	__unsafe_unretained NSString *repository;
 } TLPullRequestRelationships;
 
 extern const struct TLPullRequestFetchedProperties {
@@ -20,6 +21,7 @@ extern const struct TLPullRequestFetchedProperties {
 
 @class TLComment;
 @class TLCommit;
+@class TLRepository;
 
 
 
@@ -80,6 +82,13 @@ extern const struct TLPullRequestFetchedProperties {
 
 
 
+@property (nonatomic, strong) TLRepository* repository;
+
+//- (BOOL)validateRepository:(id*)value_ error:(NSError**)error_;
+
+
+
+
 
 @end
 
@@ -129,6 +138,11 @@ extern const struct TLPullRequestFetchedProperties {
 
 - (NSMutableSet*)primitiveCommits;
 - (void)setPrimitiveCommits:(NSMutableSet*)value;
+
+
+
+- (TLRepository*)primitiveRepository;
+- (void)setPrimitiveRepository:(TLRepository*)value;
 
 
 @end
