@@ -8,7 +8,10 @@
 
 #import "TLAppDelegate.h"
 #import "TLGitHubAPI.h"
+#import "PullRequestTableEntry.h"
 
+#import "TLPullRequest.h"
+#import "TLAuthor.h"
 
 @interface TLAppDelegate()
 
@@ -32,6 +35,7 @@
 @synthesize detailView;
 
 @synthesize pullRequestTable;
+@synthesize pullRequestsArrayController;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -40,13 +44,10 @@
     self.api = [[TLGitHubAPI alloc] init];
     [self.api updateIntoMOC:self.managedObjectContext];
 
-    _pullRequestData = [[NSMutableArray alloc] initWithCapacity:0];
     [self.pullRequestTable reloadData];
 
     switchSidebar = NO;
     [self.splitView adjustSubviews];
-
-    // [self.api generateDummiesIntoMOC:self.managedObjectContext];
 }
 
 // Returns the directory the application uses to store the Core Data store file. This code uses a directory named "com.torsten-and-lars.GitHubNotificationCenter" in the user's Application Support directory.
@@ -55,6 +56,42 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSURL *appSupportURL = [[fileManager URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask] lastObject];
     return [appSupportURL URLByAppendingPathComponent:@"com.torsten-and-lars.GitHubNotificationCenter"];
+}
+
+- (NSView *)tableView:(NSTableView *)tableView
+   viewForTableColumn:(NSTableColumn *)tableColumn
+                  row:(NSInteger)row {
+
+
+    PullRequestTableEntry *result = (PullRequestTableEntry *) [tableView makeViewWithIdentifier:@"PullRequest" owner:self];
+    result.frame = NSMakeRect(0, 0, 395, 90);
+
+    TLPullRequest *pullRequest = [self.pullRequestsArrayController.arrangedObjects objectAtIndex:row];
+
+    [result.pullRequestName bind:@"value" toObject:pullRequest withKeyPath:@"label" options:nil];
+    [result.pullRequestDescription bind:@"value" toObject:pullRequest withKeyPath:@"pullRequestDescription" options:nil];
+    [result.pullRequestAuthorName bind:@"value" toObject:pullRequest.author withKeyPath:@"name" options:nil];
+    // [result.pullRequestOriginRepo bind:@"value" toObject:pullRequest.repository withKeyPath:@"name" options:nil];
+
+    if (!result.pullRequestAuthorImage.image) {
+        dispatch_queue_t queue = dispatch_queue_create("GitHubNotificationCenter",NULL);
+
+        dispatch_async(queue,^{
+            NSImage *newImage;
+            NSURL *imageURL = [NSURL URLWithString:pullRequest.author.avatarURL];
+            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+            if (imageData != nil) {
+                newImage = [[NSImage alloc] initWithData:imageData];
+                [result.pullRequestAuthorImage setImage:newImage];
+            }
+        });
+    }
+
+    result.pullRequestCommentCount.stringValue = [NSString stringWithFormat:@"Comments %ld", pullRequest.comments.count];
+    result.pullRequestCommitCount.stringValue = [NSString stringWithFormat:@"Commits %ld", pullRequest.commits.count];
+
+    // return the result.
+    return result;
 }
 
 // ------------------------------------------------------------------------------------------
