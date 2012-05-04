@@ -11,6 +11,7 @@ fi
 FILES_WITH_WHITESPACE=`git diff-index --check --cached $against | # Find all changed files
                        sed '/^[+-]/d' |                           # Remove lines which start with + or - 
                        sed -E 's/:[0-9]+:.*//' |                  # Remove end of lines which contains numbers, etc.
+                       sed '/Generated/d' |                       # Ignore generated files
                        sed '/\.[mh]\$/!d' |                       # Only process .m and .h files
                        uniq`                                      # Remove duplicate files
 

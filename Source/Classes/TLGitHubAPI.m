@@ -106,7 +106,7 @@
                 NSString *date = [dict objectForKey:@"created_at"]; // 2012-05-03T17:22:24Z
                 NSString *label = [dict objectForKey:@"title"];
                 int number = [[dict objectForKey:@"number"] intValue];
-                
+
                 NSLog(@" - label: %@", label);
                 NSLog(@" - pull#: %d", number);
                 NSLog(@" - date: %@", date);
@@ -121,12 +121,12 @@
                 //     url = "https://api.github.com/users/torsten";
                 // };
                 NSDictionary *userDict = [dict objectForKey:@"user"];
-                
+
                 // [self updateCommentsForPullRequest:number inRepo:repo intoPullRequest:nil];
-                
+
                 [self updateCommitsForPullRequest:number inRepo:repo intoPullRequest:nil];
-                
-                
+
+
                 // NSLog(@"pull req success: (%@) %@", [thing class], thing);
             }
         }
@@ -155,14 +155,14 @@
         //         url = "https://api.github.com/repos/6wunderkinder/.../issues/comments/5508406";
         //     }
         // )
-        
+
         NSArray *comments = (NSArray *)thing;
 
         for (NSDictionary *dict in comments)
         {
-            // date, url, (author), 
+            // date, url, (author),
             // message
-            
+
             NSString *date = [dict objectForKey:@"created_at"]; // 2012-05-04T11:20:29Z
             NSString *message = [dict objectForKey:@"body"];
             int commentId = [[dict objectForKey:@"id"] intValue];
@@ -173,8 +173,8 @@
             NSLog(@"   - message: %@", message);
             NSLog(@"   - date: %@", date);
             NSLog(@"   - url: %@", url);
-            
-            
+
+
             NSDictionary *userDict = [dict objectForKey:@"user"];
             // user =         {
             //     "avatar_url" = "https://secure.gravatar.com/avatar/7bce86ef594d03d98383f9a9d842d32d?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png";
@@ -240,25 +240,25 @@
         //         url = "https://api.github.com/repos/6wunderkinder/.../commits/83...";
         //     },
         // ....
-        
-        
-        
+
+
+
         NSArray *commits = (NSArray *)thing;
 
         for (NSDictionary *dict in commits)
         {
-            // date, url, (author), 
+            // date, url, (author),
             // message
-            
+
             NSString *sha = [dict objectForKey:@"sha"];
             NSString *message = [[dict objectForKey:@"commit"] objectForKey:@"message"];
-            
+
             NSString *date = [[[dict objectForKey:@"commit"] objectForKey:@"author"] objectForKey:@"date"]; // 2012-05-03T07:23:23-07:00
-            
+
             NSLog(@"   - sha: %@", sha);
             NSLog(@"   - message: %@", message);
             NSLog(@"   - date: %@", date);
-            
+
             [self updateCommentsForCommit:sha inRepo:repo];
         }
     }
@@ -306,13 +306,13 @@
         //         };
         //     }
         // )
-        
-        
+
+
         NSArray *commitComments = (NSArray *)thing;
 
         for (NSDictionary *dict in commitComments)
         {
-            
+
         }
     }
     failure:^(NSError * err)
