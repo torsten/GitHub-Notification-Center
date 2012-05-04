@@ -62,7 +62,6 @@
         [self.engine pullRequestsForRepository:repo
         success:^(id thing)
         {
-            NSLog(@"requests: %@", [thing class]);
             NSArray *pullRequests = (NSArray *)thing;
 
             for (NSDictionary *dict in pullRequests)
@@ -105,10 +104,9 @@
                 // };
                 NSDictionary *userDict = [dict objectForKey:@"user"];
                 
-                [self updateCommentsForPullRequest:number inRepo:repo];
+                [self updateCommentsForPullRequest:number inRepo:repo intoPullRequest:nil];
                 
-                
-//                NSLog(@" - dict: %@", dict);
+                // NSLog(@"pull req success: (%@) %@", [thing class], thing);
             }
         }
         failure:^(NSError * err)
@@ -119,12 +117,14 @@
 }
 
 
-- (void)updateCommentsForPullRequest:(int)pullRequestId inRepo:(NSString *)repo
+- (void)updateCommentsForPullRequest:(int)pullRequestId
+                              inRepo:(NSString *)repo
+                     intoPullRequest:(TLPullRequest *)pullRequest
 {
     [self.engine commentsForIssue:pullRequestId forRepository:repo
     success:^(id thing)
     {
-        NSLog(@"pull comment success: (%@) %@", [thing class], thing);
+        // NSLog(@"pull comment success: (%@) %@", [thing class], thing);
         // (__NSArrayM) (
         //         {
         //         body = "Test comment on pull request";
@@ -132,16 +132,37 @@
         //         id = 5508406;
         //         "updated_at" = "2012-05-04T11:21:55Z";
         //         url = "https://api.github.com/repos/6wunderkinder/wunderkit-clientapi/issues/comments/5508406";
-        //         user =         {
-        //             "avatar_url" = "https://secure.gravatar.com/avatar/7bce86ef594d03d98383f9a9d842d32d?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png";
-        //             "gravatar_id" = 7bce86ef594d03d98383f9a9d842d32d;
-        //             id = 13548;
-        //             login = torsten;
-        //             url = "https://api.github.com/users/torsten";
-        //         };
         //     }
         // )
         
+        NSArray *comments = (NSArray *)thing;
+
+        for (NSDictionary *dict in comments)
+        {
+            // date, url, (author), 
+            // message
+            
+            NSString *date = [dict objectForKey:@"created_at"]; // 2012-05-04T11:20:29Z
+            NSString *message = [dict objectForKey:@"body"];
+            int commentId = [[dict objectForKey:@"id"] intValue];
+            NSString *url = [NSString stringWithFormat:@"https://github.com/%@/pull/%d#issuecomment-%d",
+                                                       repo, pullRequestId, commentId];
+
+            NSLog(@"   - id: %d", commentId);
+            NSLog(@"   - message: %@", message);
+            NSLog(@"   - date: %@", date);
+            NSLog(@"   - url: %@", url);
+            
+            
+            NSDictionary *userDict = [dict objectForKey:@"user"];
+            // user =         {
+            //     "avatar_url" = "https://secure.gravatar.com/avatar/7bce86ef594d03d98383f9a9d842d32d?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png";
+            //     "gravatar_id" = 7bce86ef594d03d98383f9a9d842d32d;
+            //     id = 13548;
+            //     login = torsten;
+            //     url = "https://api.github.com/users/torsten";
+            // };
+        }
     }
     failure:^(NSError * err)
     {
