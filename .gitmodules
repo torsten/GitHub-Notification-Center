@@ -1,0 +1,3 @@
+[submodule "Source/Libraries/UAGithubEngine"]
+	path = Source/Libraries/UAGithubEngine
+	url = https://github.com/owainhunt/UAGithubEngine.git

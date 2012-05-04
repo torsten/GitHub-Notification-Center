@@ -14,7 +14,18 @@
 		2FDB9F8B1553F87500CB7487 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FDB9F811553F87500CB7487 /* InfoPlist.strings */; };
 		2FDB9F8C1553F87500CB7487 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDB9F831553F87500CB7487 /* MainMenu.xib */; };
 		2FDB9F8D1553F87500CB7487 /* GitHubNotificationCenter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB9F851553F87500CB7487 /* GitHubNotificationCenter.xcdatamodeld */; };
+		E5867AF7155400FB00A7E61D /* UAGithubEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5867AF5155400E800A7E61D /* UAGithubEngine.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E5867AF4155400E800A7E61D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E5867AED155400E800A7E61D /* UAGithubEngine.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CC52FF9D15378566005A767A;
+			remoteInfo = UAGithubEngine;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		2FDB9F4F1553F7AE00CB7487 /* GitHubNotificationCenter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GitHubNotificationCenter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,6 +42,7 @@
 		2FDB9F821553F87500CB7487 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2FDB9F841553F87500CB7487 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		2FDB9F861553F87500CB7487 /* GitHubNotificationCenter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitHubNotificationCenter.xcdatamodel; sourceTree = "<group>"; };
+		E5867AED155400E800A7E61D /* UAGithubEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UAGithubEngine.xcodeproj; path = Libraries/UAGithubEngine/UAGithubEngine.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5867AF7155400FB00A7E61D /* UAGithubEngine.framework in Frameworks */,
 				2FDB9F541553F7AE00CB7487 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -52,6 +65,7 @@
 				2FDB9F7C1553F87500CB7487 /* GitHubNotificationCenter-Info.plist */,
 				2FDB9F7D1553F87500CB7487 /* GitHubNotificationCenter-Prefix.pch */,
 				2FDB9F7E1553F87500CB7487 /* Resources */,
+				E5867AED155400E800A7E61D /* UAGithubEngine.xcodeproj */,
 				2FDB9F521553F7AE00CB7487 /* Frameworks */,
 				2FDB9F501553F7AE00CB7487 /* Products */,
 			);
@@ -105,6 +119,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		E5867AEE155400E800A7E61D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E5867AF5155400E800A7E61D /* UAGithubEngine.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -145,12 +167,28 @@
 			mainGroup = 2FDB9F441553F7AE00CB7487;
 			productRefGroup = 2FDB9F501553F7AE00CB7487 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = E5867AEE155400E800A7E61D /* Products */;
+					ProjectRef = E5867AED155400E800A7E61D /* UAGithubEngine.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				2FDB9F4E1553F7AE00CB7487 /* GitHubNotificationCenter */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		E5867AF5155400E800A7E61D /* UAGithubEngine.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = UAGithubEngine.framework;
+			remoteRef = E5867AF4155400E800A7E61D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2FDB9F4D1553F7AE00CB7487 /* Resources */ = {
