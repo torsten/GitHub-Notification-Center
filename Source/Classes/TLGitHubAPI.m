@@ -48,10 +48,12 @@
     return self;
 }
 
-- (void)generateDummies
+
+- (void)generateDummiesIntoMOC:(NSManagedObjectContext *)moc
 {
-    //TLPullRequest *pullRequest = [TLPullRequest insertInManagedObjectContext:moc];
+    // TLPullRequest *pullRequest = [TLPullRequest insertInManagedObjectContext:moc];
 }
+
 
 - (void)updateIntoMOC:(NSManagedObjectContext *)moc
 {
