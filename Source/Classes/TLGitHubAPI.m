@@ -52,9 +52,12 @@
 - (void)generateDummiesIntoMOC:(NSManagedObjectContext *)moc
 {
     TLAuthor *author = [TLAuthor fetchOrCreateWithEmail:@"lars@lars.com" managedObjectContext:moc];
-
+    author.name = @"Lars Schneider";
+    author.avatarURL = @"https://secure.gravatar.com/avatar/4e2a3b00174ca6190261d1d6cf41be2a?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-orgs.png";
 
     TLPullRequest *pullRequest = [TLPullRequest fetchOrCreateWithID:@"xxxPullRequest" managedObjectContext:moc];
+    pullRequest.numberValue = 11;
+    pullRequest.label = @"My new pull request";
 
     TLComment *pullRequestComment = [TLComment fetchOrCreateWithID:@"xxxPullRequestComment" managedObjectContext:moc];
     pullRequestComment.message = @"laber rababer pull request";
