@@ -118,7 +118,7 @@
                 pullRequest.numberValue = number;
                 pullRequest.author = author;
                 pullRequest.url = url;
-                pullRequest.date = date;
+                pullRequest.created_at = date;
 
                 [self updateCommentsForPullRequest:pullRequest inRepo:repo intoMOC:moc];
                 [self updateCommitsForPullRequest:pullRequest inRepo:repo intoMOC:moc];
@@ -186,7 +186,7 @@
             pullRequestComment.message = message;
             pullRequestComment.url = url;
             pullRequestComment.author = author;
-            pullRequestComment.date = date;
+            pullRequestComment.created_at = date;
 
             [pullRequest addCommentsObject:pullRequestComment];
         }
@@ -273,7 +273,7 @@
             TLCommit *commit = [TLCommit fetchOrCreateWithID:sha managedObjectContext:moc];
             commit.message = message;
             commit.url = [NSString stringWithFormat:@"https://github.com/%@/commit/%@", repo, sha];
-            commit.date = date;
+            commit.created_at = date;
 
             [pullRequest addCommitsObject:commit];
 
@@ -342,7 +342,7 @@
             commitComment.message = message;
             commitComment.url = [NSString stringWithFormat:@"https://github.com/%@/commit/%@#commitcomment-%@",
                                                            repo, sha, githubID];
-            commitComment.date = date;
+            commitComment.updated_at = date;
 
             [commit addCommentsObject:commitComment];
         }
