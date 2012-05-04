@@ -20,7 +20,7 @@ NSString *const kTLDatabaseModelFolder = @"GitHubNotificationCenter";
     NSPersistentStoreCoordinator    *_persistentStoreCoordinator;
 }
 
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectModel;
+@property (nonatomic, readonly) NSManagedObjectContext *managedObjectContext;
 
 
 - (void)initManagedObjectModel;
@@ -35,7 +35,7 @@ NSString *const kTLDatabaseModelFolder = @"GitHubNotificationCenter";
 @implementation TLCoreData
 
 
-@synthesize managedObjectModel = _managedObjectContext;
+@synthesize managedObjectContext = _managedObjectContext;
 
 
 // ------------------------------------------------------------------------------------------
@@ -178,7 +178,7 @@ NSString *const kTLDatabaseModelFolder = @"GitHubNotificationCenter";
 // ------------------------------------------------------------------------------------------
 + (NSManagedObjectContext *)mainManagedObjectContext
 {
-    return [TLCoreData shared].managedObjectModel;
+    return [TLCoreData shared].managedObjectContext;
 }
 
 
