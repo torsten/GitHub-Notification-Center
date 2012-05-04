@@ -51,7 +51,7 @@
 
 - (void)generateDummiesIntoMOC:(NSManagedObjectContext *)moc
 {
-    TLAuthor *author = [TLAuthor fetchOrCreateWithEmail:@"lars@lars.com" managedObjectContext:moc];
+    TLAuthor *author = [TLAuthor fetchOrCreateWithID:@"githubID" managedObjectContext:moc];
     author.name = @"Lars Schneider";
     author.avatarURL = @"https://secure.gravatar.com/avatar/4e2a3b00174ca6190261d1d6cf41be2a?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-orgs.png";
 

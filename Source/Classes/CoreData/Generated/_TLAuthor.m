@@ -5,7 +5,6 @@
 
 const struct TLAuthorAttributes TLAuthorAttributes = {
 	.avatarURL = @"avatarURL",
-	.email = @"email",
 	.name = @"name",
 };
 
@@ -50,13 +49,6 @@ const struct TLAuthorFetchedProperties TLAuthorFetchedProperties = {
 
 
 @dynamic avatarURL;
-
-
-
-
-
-
-@dynamic email;
 
 
 

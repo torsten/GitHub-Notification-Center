@@ -6,6 +6,7 @@
 const struct TLPullRequestAttributes TLPullRequestAttributes = {
 	.label = @"label",
 	.number = @"number",
+	.pullRequestDescription = @"pullRequestDescription",
 };
 
 const struct TLPullRequestRelationships TLPullRequestRelationships = {
@@ -81,6 +82,13 @@ const struct TLPullRequestFetchedProperties TLPullRequestFetchedProperties = {
 - (void)setPrimitiveNumberValue:(int16_t)value_ {
 	[self setPrimitiveNumber:[NSNumber numberWithShort:value_]];
 }
+
+
+
+
+
+@dynamic pullRequestDescription;
+
 
 
 
