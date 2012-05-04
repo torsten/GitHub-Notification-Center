@@ -36,7 +36,7 @@
     if ((self = [super init]))
     {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        
+
         NSString *user = [defaults stringForKey:@"TLUserName"];
         NSString *pw = [defaults stringForKey:@"TLPassword"];
         NSArray *repos = [defaults stringArrayForKey:@"TLRepoList"];
@@ -142,7 +142,7 @@
 
 
 // [engine :(NSInteger)pullRequestId forRepository:(NSString *)repositoryPath success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock];
-                     
+
 // [engine commentsForIssue:34 forRepository:@"6wunderkinder/wunderkit-clientapi"
 //                      success:^(id thing)
 //                      {
