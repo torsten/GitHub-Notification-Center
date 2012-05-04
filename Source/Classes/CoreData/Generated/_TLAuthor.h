@@ -2,11 +2,10 @@
 // Make changes to TLAuthor.h instead.
 
 #import <CoreData/CoreData.h>
-#import "TLManagedObject.h"
+#import "TLGithubObject.h"
 
 extern const struct TLAuthorAttributes {
 	__unsafe_unretained NSString *avatarURL;
-	__unsafe_unretained NSString *email;
 	__unsafe_unretained NSString *name;
 } TLAuthorAttributes;
 
@@ -22,11 +21,10 @@ extern const struct TLAuthorFetchedProperties {
 
 
 
-
 @interface TLAuthorID : NSManagedObjectID {}
 @end
 
-@interface _TLAuthor : TLManagedObject {}
+@interface _TLAuthor : TLGithubObject {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
@@ -39,14 +37,6 @@ extern const struct TLAuthorFetchedProperties {
 
 
 //- (BOOL)validateAvatarURL:(id*)value_ error:(NSError**)error_;
-
-
-
-
-@property (nonatomic, strong) NSString* email;
-
-
-//- (BOOL)validateEmail:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -84,12 +74,6 @@ extern const struct TLAuthorFetchedProperties {
 
 - (NSString*)primitiveAvatarURL;
 - (void)setPrimitiveAvatarURL:(NSString*)value;
-
-
-
-
-- (NSString*)primitiveEmail;
-- (void)setPrimitiveEmail:(NSString*)value;
 
 
 

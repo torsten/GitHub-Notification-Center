@@ -7,6 +7,7 @@
 extern const struct TLPullRequestAttributes {
 	__unsafe_unretained NSString *label;
 	__unsafe_unretained NSString *number;
+	__unsafe_unretained NSString *pullRequestDescription;
 } TLPullRequestAttributes;
 
 extern const struct TLPullRequestRelationships {
@@ -19,6 +20,7 @@ extern const struct TLPullRequestFetchedProperties {
 
 @class TLComment;
 @class TLCommit;
+
 
 
 
@@ -51,6 +53,14 @@ extern const struct TLPullRequestFetchedProperties {
 - (void)setNumberValue:(int16_t)value_;
 
 //- (BOOL)validateNumber:(id*)value_ error:(NSError**)error_;
+
+
+
+
+@property (nonatomic, strong) NSString* pullRequestDescription;
+
+
+//- (BOOL)validatePullRequestDescription:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -101,6 +111,12 @@ extern const struct TLPullRequestFetchedProperties {
 
 - (int16_t)primitiveNumberValue;
 - (void)setPrimitiveNumberValue:(int16_t)value_;
+
+
+
+
+- (NSString*)primitivePullRequestDescription;
+- (void)setPrimitivePullRequestDescription:(NSString*)value;
 
 
 
