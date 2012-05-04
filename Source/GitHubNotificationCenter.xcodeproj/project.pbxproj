@@ -32,6 +32,7 @@
 		2FDB9F8C1553F87500CB7487 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2FDB9F831553F87500CB7487 /* MainMenu.xib */; };
 		2FDB9F8D1553F87500CB7487 /* GitHubNotificationCenter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2FDB9F851553F87500CB7487 /* GitHubNotificationCenter.xcdatamodeld */; };
 		8F557F79155417A500923D02 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F557F78155417A500923D02 /* WebKit.framework */; };
+		8F557FA51554461C00923D02 /* PullRequestTableEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F557FA41554461C00923D02 /* PullRequestTableEntry.m */; };
 		E5867AF7155400FB00A7E61D /* UAGithubEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5867AF5155400E800A7E61D /* UAGithubEngine.framework */; };
 /* End PBXBuildFile section */
 
@@ -119,6 +120,8 @@
 		2FDB9F841553F87500CB7487 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		2FDB9F861553F87500CB7487 /* GitHubNotificationCenter.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GitHubNotificationCenter.xcdatamodel; sourceTree = "<group>"; };
 		8F557F78155417A500923D02 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		8F557FA31554461C00923D02 /* PullRequestTableEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullRequestTableEntry.h; sourceTree = "<group>"; };
+		8F557FA41554461C00923D02 /* PullRequestTableEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullRequestTableEntry.m; sourceTree = "<group>"; };
 		E5867AED155400E800A7E61D /* UAGithubEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UAGithubEngine.xcodeproj; path = Libraries/UAGithubEngine/UAGithubEngine.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,6 +150,8 @@
 		2FB6D1DB1554410200D9D937 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8F557FA31554461C00923D02 /* PullRequestTableEntry.h */,
+				8F557FA41554461C00923D02 /* PullRequestTableEntry.m */,
 				2FB6D1DC1554410200D9D937 /* CoreData */,
 				2FB6D1F91554410200D9D937 /* Extensions */,
 				2FB6D1FE1554410200D9D937 /* main.m */,
@@ -384,6 +389,7 @@
 				2FB6D2161554410200D9D937 /* TLAppDelegate.m in Sources */,
 				2FB6D2171554410200D9D937 /* TLGitHubAPI.m in Sources */,
 				2FB6D2181554410200D9D937 /* WebViewController.m in Sources */,
+				8F557FA51554461C00923D02 /* PullRequestTableEntry.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

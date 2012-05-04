@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface TLAppDelegate : NSObject <NSApplicationDelegate, NSSplitViewDelegate, NSTableViewDataSource, NSTableViewDelegate>
+@interface TLAppDelegate : NSObject <NSApplicationDelegate, NSSplitViewDelegate, NSTableViewDelegate>
 {
     NSMutableArray *_pullRequestData;
     BOOL switchSidebar;
@@ -25,6 +25,7 @@
 @property (readwrite, strong, nonatomic) IBOutlet NSView *detailView;
 
 @property (readwrite, strong, nonatomic) IBOutlet NSTableView *pullRequestTable;
+@property (readwrite, strong, nonatomic) IBOutlet NSArrayController *pullRequestsArrayController;
 
 - (IBAction)saveAction:(id)sender;
 - (IBAction)toggleSidebar:(id)sender;
