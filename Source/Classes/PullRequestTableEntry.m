@@ -17,11 +17,11 @@
 @synthesize pullRequestOriginRepo;
 @synthesize pullRequestCommentCount;
 @synthesize pullRequestCommitCount;
+@synthesize pullRequestNumber;
 
 - (void)setObjectValue:(id)objectValue
 {
 	[super setObjectValue:objectValue];
-    NSLog(@"Here");
 }
 
 @end

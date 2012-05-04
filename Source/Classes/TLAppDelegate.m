@@ -70,7 +70,7 @@
     [result.pullRequestName bind:@"value" toObject:pullRequest withKeyPath:@"label" options:nil];
     [result.pullRequestDescription bind:@"value" toObject:pullRequest withKeyPath:@"pullRequestDescription" options:nil];
     [result.pullRequestAuthorName bind:@"value" toObject:pullRequest.author withKeyPath:@"name" options:nil];
-    // [result.pullRequestOriginRepo bind:@"value" toObject:pullRequest.repository withKeyPath:@"name" options:nil];
+    [result.pullRequestOriginRepo bind:@"value" toObject:pullRequest.repository withKeyPath:@"name" options:nil];
 
     if (!result.pullRequestAuthorImage.image) {
         dispatch_queue_t queue = dispatch_queue_create("GitHubNotificationCenter",NULL);
@@ -88,6 +88,7 @@
 
     result.pullRequestCommentCount.stringValue = [NSString stringWithFormat:@"Comments %ld", pullRequest.comments.count];
     result.pullRequestCommitCount.stringValue = [NSString stringWithFormat:@"Commits %ld", pullRequest.commits.count];
+    result.pullRequestNumber.stringValue = [NSString stringWithFormat:@"#%ld", [pullRequest.number integerValue]];
 
     // return the result.
     return result;

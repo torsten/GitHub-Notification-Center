@@ -17,5 +17,6 @@
 @property (nonatomic, strong, readwrite) IBOutlet NSTextField *pullRequestOriginRepo;
 @property (nonatomic, strong, readwrite) IBOutlet NSTextField *pullRequestCommentCount;
 @property (nonatomic, strong, readwrite) IBOutlet NSTextField *pullRequestCommitCount;
+@property (nonatomic, strong, readwrite) IBOutlet NSTextField *pullRequestNumber;
 
 @end
