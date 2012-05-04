@@ -2,6 +2,13 @@
 
 @implementation TLAuthor
 
-// Custom logic goes here.
+
++ (id)fetchOrCreateWithEmail:(NSString *)email
+        managedObjectContext:(NSManagedObjectContext *)moc
+{
+    // TODO
+    return nil;
+}
+
 
 @end

@@ -1,5 +1,8 @@
 #import "_TLGithubObject.h"
 
 @interface TLGithubObject : _TLGithubObject {}
-// Custom logic goes here.
+
++ (id)fetchOrCreateWithID:(NSString *)githubID
+     managedObjectContext:(NSManagedObjectContext *)moc;
+
 @end

@@ -58,6 +58,15 @@ const struct TLCommitFetchedProperties TLCommitFetchedProperties = {
 @dynamic comments;
 
 
+- (NSMutableSet*)commentsSet {
+    [self willAccessValueForKey:@"comments"];
+
+    NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"comments"];
+
+    [self didAccessValueForKey:@"comments"];
+    return result;
+}
+
 
 @dynamic pullRequest;
 
