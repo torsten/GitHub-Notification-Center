@@ -51,9 +51,6 @@
 
 - (void)generateDummiesIntoMOC:(NSManagedObjectContext *)moc
 {
-    TLAuthor *author = [TLAuthor fetchOrCreateWithEmail:@"lars@lars.com" managedObjectContext:moc];
-
-
     TLPullRequest *pullRequest = [TLPullRequest fetchOrCreateWithID:@"xxxPullRequest" managedObjectContext:moc];
 
     TLComment *pullRequestComment = [TLComment fetchOrCreateWithID:@"xxxPullRequestComment" managedObjectContext:moc];
@@ -87,8 +84,6 @@
                 // TLAuthor:
                 // avatarURL, email, name
 
-                // TLPullRequest *pullRequest = [TLPullRequest insertInManagedObjectContext:moc];
-
                 // date, url, (author),
                 // label, comments, commits
 
@@ -106,12 +101,13 @@
                 NSString *date = [dict objectForKey:@"created_at"]; // 2012-05-03T17:22:24Z
                 NSString *label = [dict objectForKey:@"title"];
                 int number = [[dict objectForKey:@"number"] intValue];
+                NSString *gitHubId = [dic objectForKey:@"id"];
 
                 NSLog(@" - label: %@", label);
                 NSLog(@" - pull#: %d", number);
                 NSLog(@" - date: %@", date);
                 NSLog(@" - url: %@", url);
-
+                NSLog(@" - id: %@", gitHubId);
 
                 // user =     {
                 //     "avatar_url" = "https://secure.gravatar.com/avatar/7bce86ef594d03d98383f9a9d842d32d?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png";
@@ -122,9 +118,16 @@
                 // };
                 NSDictionary *userDict = [dict objectForKey:@"user"];
 
+                TLAuthor *author = [TLAuthor fetchOrCreateWithID:[user objectForKey:@"id"] managedObjectContext:moc];
+
+                TLPullRequest *pullRequest = [TLPullRequest fetchOrCreateWithID:gitHubId managedObjectContext:moc];
+                pullRequest.label = label;
+                pullRequest.number = number;
+
+
                 // [self updateCommentsForPullRequest:number inRepo:repo intoPullRequest:nil];
 
-                [self updateCommitsForPullRequest:number inRepo:repo intoPullRequest:nil];
+                [self updateCommitsForPullRequest:pullRequest inRepo:repo];
 
 
                 // NSLog(@"pull req success: (%@) %@", [thing class], thing);
@@ -138,10 +141,11 @@
 }
 
 
-- (void)updateCommentsForPullRequest:(int)pullRequestId
+- (void)updateCommentsForPullRequest:(TLPullRequest *)pullRequest
                               inRepo:(NSString *)repo
-                     intoPullRequest:(TLPullRequest *)pullRequest
 {
+    int pullRequestId = pullRequest.number;
+
     [self.engine commentsForIssue:pullRequestId forRepository:repo
     success:^(id thing)
     {
