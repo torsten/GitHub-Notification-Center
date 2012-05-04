@@ -88,7 +88,7 @@
         }
         failure:^(NSError *err)
         {
-            NSLog(@"Repo fetch fail: %@", err);
+            ALog(@"Repo fetch fail: %@", err);
         }];
     }
 }
@@ -104,12 +104,11 @@
         for (NSDictionary *dict in pullRequests)
         {
             NSString *githubID = [[dict objectForKey:@"id"] stringValue];
-
             TLAuthor *author = [self authorWithDict:[dict objectForKey:@"user"] intoMOC:moc];
 
             TLPullRequest *pullRequest = [TLPullRequest fetchOrCreateWithID:githubID managedObjectContext:moc];
-            pullRequest.label = [dict objectForKey:@"title"];
             pullRequest.author = author;
+            pullRequest.label = [dict objectForKey:@"title"];
             pullRequest.url = [dict objectForKey:@"html_url"];
             pullRequest.number = [dict objectForKey:@"number"];
             pullRequest.created_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"created_at"]];
@@ -124,7 +123,7 @@
     }
     failure:^(NSError * err)
     {
-        NSLog(@"Pull request fail: %@", err);
+        ALog(@"Pull request fail: %@", err);
     }];
 }
 
@@ -141,26 +140,16 @@
 
         for (NSDictionary *dict in comments)
         {
-            NSDate *date = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"created_at"]];
-            NSString *message = [dict objectForKey:@"body"];
-            int commentId = [[dict objectForKey:@"id"] intValue];
-            NSString *url = [NSString stringWithFormat:@"https://github.com/%@/pull/%d#issuecomment-%d",
-                                                       repo, pullRequestNumber, commentId];
+            NSString *githubID = [[dict objectForKey:@"id"] stringValue];
+            TLAuthor *author = [self authorWithDict:[dict objectForKey:@"user"] intoMOC:moc];
 
-            NSLog(@"   - id: %d", commentId);
-            NSLog(@"   - message: %@", message);
-            NSLog(@"   - date: %@", date);
-            NSLog(@"   - url: %@", url);
-
-            NSDictionary *userDict = [dict objectForKey:@"user"];
-            TLAuthor *author = [self authorWithDict:userDict intoMOC:moc];
-
-            TLComment *pullRequestComment = [TLComment fetchOrCreateWithID:[[dict objectForKey:@"id"] stringValue]
-                                                      managedObjectContext:moc];
-            pullRequestComment.message = message;
-            pullRequestComment.url = url;
+            TLComment *pullRequestComment = [TLComment fetchOrCreateWithID:githubID managedObjectContext:moc];
             pullRequestComment.author = author;
-            pullRequestComment.created_at = date;
+            pullRequestComment.message = [dict objectForKey:@"body"];
+            pullRequestComment.created_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"created_at"]];
+            pullRequestComment.updated_at = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"updated_at"]];
+            pullRequestComment.url = [NSString stringWithFormat:@"https://github.com/%@/pull/%d#issuecomment-%@",
+                                                                repo, pullRequestNumber, [dict objectForKey:@"id"]];
 
             [pullRequest addCommentsObject:pullRequestComment];
         }
@@ -169,7 +158,7 @@
     }
     failure:^(NSError * err)
     {
-        NSLog(@"Pull comment fetch fail: %@", err);
+        ALog(@"Pull comment fetch fail: %@", err);
     }];
 }
 
@@ -258,7 +247,7 @@
     }
     failure:^(NSError * err)
     {
-        NSLog(@"Commit fetch fail: %@", err);
+        ALog(@"Commit fetch fail: %@", err);
     }];
 }
 
@@ -325,7 +314,7 @@
     }
     failure:^(NSError * err)
     {
-        NSLog(@"Commit comment fetch fail: %@", err);
+        ALog(@"Commit comment fetch fail: %@", err);
     }];
 }
 
