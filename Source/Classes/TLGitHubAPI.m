@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 6Wunderkinder. All rights reserved.
 //
 
+#import "NSDateFormatter+Extensions.h"
 #import "TLAuthor.h"
 #import "TLComment.h"
 #import "TLCommit.h"
@@ -90,7 +91,7 @@
             for (NSDictionary *dict in pullRequests)
             {
                 NSString *url = [dict objectForKey:@"html_url"];
-                NSString *date = [dict objectForKey:@"created_at"]; // 2012-05-03T17:22:24Z
+                NSDate *date = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"created_at"]];
                 NSString *label = [dict objectForKey:@"title"];
                 int number = [[dict objectForKey:@"number"] intValue];
                 NSString *gitHubId = [[dict objectForKey:@"id"] stringValue];
@@ -117,12 +118,13 @@
                 pullRequest.numberValue = number;
                 pullRequest.author = author;
                 pullRequest.url = url;
-
-                [moc saveChanges];
+                pullRequest.date = date;
 
                 [self updateCommentsForPullRequest:pullRequest inRepo:repo intoMOC:moc];
                 [self updateCommitsForPullRequest:pullRequest inRepo:repo intoMOC:moc];
             }
+
+            [moc saveChanges];
         }
         failure:^(NSError * err)
         {
@@ -165,7 +167,7 @@
 
         for (NSDictionary *dict in comments)
         {
-            NSString *date = [dict objectForKey:@"created_at"]; // 2012-05-04T11:20:29Z
+            NSDate *date = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"created_at"]];
             NSString *message = [dict objectForKey:@"body"];
             int commentId = [[dict objectForKey:@"id"] intValue];
             NSString *url = [NSString stringWithFormat:@"https://github.com/%@/pull/%d#issuecomment-%d",
@@ -184,11 +186,12 @@
             pullRequestComment.message = message;
             pullRequestComment.url = url;
             pullRequestComment.author = author;
+            pullRequestComment.date = date;
 
             [pullRequest addCommentsObject:pullRequestComment];
-
-            [moc saveChanges];
         }
+
+        [moc saveChanges];
     }
     failure:^(NSError * err)
     {
@@ -260,14 +263,24 @@
             NSString *sha = [dict objectForKey:@"sha"];
             NSString *message = [[dict objectForKey:@"commit"] objectForKey:@"message"];
 
-            NSString *date = [[[dict objectForKey:@"commit"] objectForKey:@"author"] objectForKey:@"date"]; // 2012-05-03T07:23:23-07:00
+            NSString *dateString = [[[dict objectForKey:@"commit"] objectForKey:@"author"] objectForKey:@"date"];
+            NSDate *date = [NSDateFormatter dateFromRFC3339String:dateString];
 
             NSLog(@"   - sha: %@", sha);
             NSLog(@"   - message: %@", message);
             NSLog(@"   - date: %@", date);
 
-            [self updateCommentsForCommit:sha inRepo:repo intoMOC:moc];
+            TLCommit *commit = [TLCommit fetchOrCreateWithID:sha managedObjectContext:moc];
+            commit.message = message;
+            commit.url = [NSString stringWithFormat:@"https://github.com/%@/commit/%@", repo, sha];
+            commit.date = date;
+
+            [pullRequest addCommitsObject:commit];
+
+            [self updateCommentsForCommit:commit inRepo:repo intoMOC:moc];
         }
+
+        [moc saveChanges];
     }
     failure:^(NSError * err)
     {
@@ -276,10 +289,12 @@
 }
 
 
-- (void)updateCommentsForCommit:(NSString *)sha // TODO: Make this TLCommit
+- (void)updateCommentsForCommit:(TLCommit *)commit
                          inRepo:(NSString *)repo
                         intoMOC:(NSManagedObjectContext *)moc
 {
+    NSString *sha = commit.githubID;
+
     [self.engine commitCommentsForCommit:sha inRepository:repo
     success:^(id thing)
     {
@@ -315,13 +330,24 @@
         //     }
         // )
 
-
         NSArray *commitComments = (NSArray *)thing;
 
         for (NSDictionary *dict in commitComments)
         {
+            NSString *message = [dict objectForKey:@"body"];
+            NSString *githubID = [[dict objectForKey:@"id"] stringValue];
+            NSDate *date = [NSDateFormatter dateFromRFC3339String:[dict objectForKey:@"updated_at"]];
 
+            TLComment *commitComment = [TLComment fetchOrCreateWithID:githubID managedObjectContext:moc];
+            commitComment.message = message;
+            commitComment.url = [NSString stringWithFormat:@"https://github.com/%@/commit/%@#commitcomment-%@",
+                                                           repo, sha, githubID];
+            commitComment.date = date;
+
+            [commit addCommentsObject:commitComment];
         }
+
+        [moc saveChanges];
     }
     failure:^(NSError * err)
     {
