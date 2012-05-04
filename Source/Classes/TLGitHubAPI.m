@@ -83,26 +83,12 @@
         [self.engine pullRequestsForRepository:repo
         success:^(id thing)
         {
+            // NSLog(@"pull req success: (%@) %@", [thing class], thing);
+
             NSArray *pullRequests = (NSArray *)thing;
 
             for (NSDictionary *dict in pullRequests)
             {
-                // TLAuthor:
-                // avatarURL, email, name
-
-                // date, url, (author),
-                // label, comments, commits
-
-                // pullRequest.text = self.editingView.textView.text;
-                // pullRequest.tags = self.tagsForNewNote;
-                // pullRequest.owner = [WKWorkspace personalWorkspace];
-                // pullRequest.workspace = self.workspace;
-                // pullRequest.orderIndexValue = self.note.newOrderIndex;
-
-//                TLPullRequest *pullRequest = [TLPullRequest ];
-
-
-
                 NSString *url = [dict objectForKey:@"html_url"];
                 NSString *date = [dict objectForKey:@"created_at"]; // 2012-05-03T17:22:24Z
                 NSString *label = [dict objectForKey:@"title"];
@@ -124,10 +110,7 @@
                 // };
                 NSDictionary *userDict = [dict objectForKey:@"user"];
 
-                TLAuthor *author = [TLAuthor fetchOrCreateWithID:[[userDict objectForKey:@"id"] stringValue] managedObjectContext:moc];
-                author.name = [userDict objectForKey:@"login"];
-                author.avatarURL = [userDict objectForKey:@"avatar_url"];
-                author.url = [NSString stringWithFormat:@"http://github.com/%@", author.name];
+                TLAuthor *author = [self authorWithDict:userDict intoMOC:moc];
 
                 TLPullRequest *pullRequest = [TLPullRequest fetchOrCreateWithID:gitHubId managedObjectContext:moc];
                 pullRequest.label = label;
@@ -139,9 +122,6 @@
 
                 [self updateCommentsForPullRequest:pullRequest inRepo:repo intoMOC:moc];
                 [self updateCommitsForPullRequest:pullRequest inRepo:repo intoMOC:moc];
-
-
-                // NSLog(@"pull req success: (%@) %@", [thing class], thing);
             }
         }
         failure:^(NSError * err)
@@ -151,6 +131,15 @@
     }
 }
 
+- (TLAuthor *)authorWithDict:(NSDictionary *)userDict intoMOC:(NSManagedObjectContext *)moc
+{
+    TLAuthor *author = [TLAuthor fetchOrCreateWithID:[[userDict objectForKey:@"id"] stringValue] managedObjectContext:moc];
+    author.name = [userDict objectForKey:@"login"];
+    author.avatarURL = [userDict objectForKey:@"avatar_url"];
+    author.url = [NSString stringWithFormat:@"http://github.com/%@", author.name];
+
+    return author;
+}
 
 - (void)updateCommentsForPullRequest:(TLPullRequest *)pullRequest
                               inRepo:(NSString *)repo
@@ -176,9 +165,6 @@
 
         for (NSDictionary *dict in comments)
         {
-            // date, url, (author),
-            // message
-
             NSString *date = [dict objectForKey:@"created_at"]; // 2012-05-04T11:20:29Z
             NSString *message = [dict objectForKey:@"body"];
             int commentId = [[dict objectForKey:@"id"] intValue];
@@ -190,17 +176,18 @@
             NSLog(@"   - date: %@", date);
             NSLog(@"   - url: %@", url);
 
-
             NSDictionary *userDict = [dict objectForKey:@"user"];
-            // user =         {
-            //     "avatar_url" = "https://secure.gravatar.com/avatar/7bce86ef594d03d98383f9a9d842d32d?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png";
-            //     "gravatar_id" = 7bce86ef594d03d98383f9a9d842d32d;
-            //     id = 13548;
-            //     login = torsten;
-            //     url = "https://api.github.com/users/torsten";
-            // };
+            TLAuthor *author = [self authorWithDict:userDict intoMOC:moc];
 
-            // [moc saveChanges];
+            TLComment *pullRequestComment = [TLComment fetchOrCreateWithID:[[dict objectForKey:@"id"] stringValue]
+                                                      managedObjectContext:moc];
+            pullRequestComment.message = message;
+            pullRequestComment.url = url;
+            pullRequestComment.author = author;
+
+            [pullRequest addCommentsObject:pullRequestComment];
+
+            [moc saveChanges];
         }
     }
     failure:^(NSError * err)
