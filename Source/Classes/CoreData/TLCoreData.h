@@ -11,6 +11,7 @@
 @interface TLCoreData : NSObject
 
 + (NSManagedObjectContext *)mainManagedObjectContext;
++ (NSManagedObjectContext *)createWorkerManagedObjectContext;
 + (void)deleteDatabase;
 
 @end

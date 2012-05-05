@@ -21,6 +21,7 @@ NSString *const kTLDatabaseModelFolder = @"GitHubNotificationCenter";
 }
 
 @property (nonatomic, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 
 - (void)initManagedObjectModel;
@@ -36,6 +37,7 @@ NSString *const kTLDatabaseModelFolder = @"GitHubNotificationCenter";
 
 
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 
 // ------------------------------------------------------------------------------------------
@@ -173,12 +175,21 @@ NSString *const kTLDatabaseModelFolder = @"GitHubNotificationCenter";
 }
 
 
-// ------------------------------------------------------------------------------------------
-#pragma mark - Property Getter
-// ------------------------------------------------------------------------------------------
 + (NSManagedObjectContext *)mainManagedObjectContext
 {
+    ZAssert([NSThread isMainThread] == YES, @"Main MOC must only be accessed in main thread.");
     return [TLCoreData shared].managedObjectContext;
+}
+
+
++ (NSManagedObjectContext *)createWorkerManagedObjectContext
+{
+    ZAssert([NSThread isMainThread] == NO, @"Worker MOC must not be created in main thread.");
+    NSManagedObjectContext *workerMOC = [[NSManagedObjectContext alloc] init];
+    workerMOC.undoManager = nil;
+    workerMOC.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy;
+    workerMOC.persistentStoreCoordinator = [TLCoreData shared].persistentStoreCoordinator;
+    return workerMOC;
 }
 
 

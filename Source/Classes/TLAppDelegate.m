@@ -36,17 +36,23 @@
 @synthesize pullRequestsArrayController;
 
 
+- (void)requestGitHubDataInBackground
+{
+    dispatch_queue_t thread = dispatch_queue_create("github_request_thread", NULL);
+    dispatch_async(thread, ^{
+        [self.api updateIntoMOC:[TLCoreData createWorkerManagedObjectContext]];
+    });
+    dispatch_release(thread);
+}
+
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
-
-    self.api = [[TLGitHubAPI alloc] init];
-    [self.api updateIntoMOC:[TLCoreData mainManagedObjectContext]];
-
-    [self.pullRequestTable reloadData];
-
     switchSidebar = NO;
     [self.splitView adjustSubviews];
+
+    self.api = [[TLGitHubAPI alloc] init];
+    [self requestGitHubDataInBackground];
 }
 
 
